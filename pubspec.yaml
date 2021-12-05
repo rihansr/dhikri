@@ -1,0 +1,76 @@
+name: dhikri
+description: A new Flutter application.
+
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  # Media
+  cupertino_icons: ^1.0.3
+  community_material_icon: ^5.9.55
+  flutter_svg: ^0.22.0
+
+  # Data Management
+  provider: ^5.0.0
+  shared_preferences: ^2.0.5
+
+  # Browser
+  url_launcher: ^6.0.3
+  flutter_inappwebview: ^5.3.2
+
+  # Other
+  toast: ^0.1.5
+  percent_indicator: ^3.0.1
+  auto_size_text: ^2.1.0
+  flutter_share : ^2.0.0
+  equatable: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+
+  fonts:
+    - family: Work Sans
+      fonts:
+        - asset: assets/fonts/WorkSans-Thin.ttf
+          weight: 100
+          style: normal
+        - asset: assets/fonts/WorkSans-ExtraLight.ttf
+          weight: 200
+          style: normal
+        - asset: assets/fonts/WorkSans-Light.ttf
+          weight: 300
+          style: normal
+        - asset: assets/fonts/WorkSans-Regular.ttf
+          weight: 400
+          style: normal
+        - asset: assets/fonts/WorkSans-Medium.ttf
+          weight: 500
+          style: normal
+        - asset: assets/fonts/WorkSans-SemiBold.ttf
+          weight: 600
+          style: normal
+        - asset: assets/fonts/WorkSans-Bold.ttf
+          weight: 700
+          style: normal
+        - asset: assets/fonts/WorkSans-ExtraBold.ttf
+          weight: 800
+          style: normal
+        - asset: assets/fonts/WorkSans-Black.ttf
+          weight: 900
+          style: normal
