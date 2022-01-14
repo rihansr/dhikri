@@ -14,7 +14,7 @@ import 'package:flutter_share/flutter_share.dart';
 class HomeBloc extends BaseBloc {
   Data _data;
 
-  HomeBloc({@required Data data}) : _data = data;
+  HomeBloc({required Data data}) : _data = data;
 
   void init() {
     if (dateTimeHelper.itsANewWeek()) {
@@ -69,7 +69,7 @@ class HomeBloc extends BaseBloc {
     for (int i = 0; i < _weekdays.length; i++) {
       Weekday _weekday = _weekdays[i];
       if (_weekday == weekday) {
-        bool isChecked = _weekdays[i]?.status ?? false;
+        bool isChecked = _weekdays[i].status ?? false;
         preferenceManager.setWeekday(
           key: _weekday.id,
           value: isChecked ? dateTimeHelper.lastWeek : dateTimeHelper.today,
@@ -91,7 +91,7 @@ class HomeBloc extends BaseBloc {
   UnmodifiableListView<Adhkar> get adhkars => UnmodifiableListView(_adhkars);
 
   void setAdhkars() {
-    _allDuas = _data.allDuas ?? [];
+    _allDuas = (_data.allDuas ?? []) as Adhkar;
     _adhkars = _data.adhkars ?? [];
     notifyListeners();
   }
@@ -102,31 +102,31 @@ class HomeBloc extends BaseBloc {
           date: preferenceManager.getReadItem(key: '${adhkar.id}'));
       double progress =
           readToday ? preferenceManager.adhkarProgress(key: adhkar.id) : 0;
-      _adhkars[adhkar.id - 1].progress = progress;
+      _adhkars[adhkar.id! - 1].progress = progress;
     }
     notifyListeners();
   }
 
-  void makeProgress({@required int adhkarId, @required int itemId}) {
-    if ((adhkarId ?? 0) == 0) return;
+  void makeProgress({required int adhkarId, required int? itemId}) {
+    if (adhkarId == 0) return;
 
     Adhkar adhkar = _adhkars[adhkarId - 1];
-    if (!adhkar.weekdays.contains(dateTimeHelper.weekday)) return;
+    if (!adhkar.weekdays!.contains(dateTimeHelper.weekday)) return;
 
     preferenceManager.setReadItem(
         key: '${adhkarId}_$itemId', value: dateTimeHelper.today);
 
     double progress = 0.0;
 
-    for (int i = 0; i < adhkar?.items?.length ?? 0; i++) {
-      AdhkarItem item = adhkar.items[i];
+    for (int i = 0; i < (adhkar.items?.length ?? 0); i++) {
+      AdhkarItem item = adhkar.items![i];
       bool readToday = dateTimeHelper.itsToday(
           date: preferenceManager.getReadItem(key: '${adhkar.id}_${item.id}'));
       if (readToday) {
-        _adhkars[adhkarId - 1].items[i].read = true;
-        int itemPos = _allDuas.items.indexOf(item);
-        if (itemPos != -1) _allDuas.items[itemPos].read = true;
-        progress = progress + (100 / (adhkar?.items?.length ?? 1));
+        _adhkars[adhkarId - 1].items![i].read = true;
+        int itemPos = _allDuas.items!.indexOf(item);
+        if (itemPos != -1) _allDuas.items![itemPos].read = true;
+        progress = progress + (100 / (adhkar.items?.length ?? 1));
       }
     }
 
@@ -136,7 +136,7 @@ class HomeBloc extends BaseBloc {
       preferenceManager.setReadItem(
           key: '${adhkar.id}', value: dateTimeHelper.today);
 
-      _adhkars[adhkar.id - 1].progress = progress;
+      _adhkars[adhkar.id! - 1].progress = progress;
     }
 
     notifyListeners();
@@ -152,12 +152,12 @@ class HomeBloc extends BaseBloc {
   Adhkar get adhkar => _adhkar;
   set adhkar(azkar) => _adhkar = azkar;
 
-  Future<bool> itemDetails(BuildContext context, AdhkarItem item) async {
-    for (int azkarId in item.adhkarIds ?? []) {
-      makeProgress(adhkarId: azkarId, itemId: item.id);
+  Future<bool> itemDetails(BuildContext context, AdhkarItem? item) async {
+    for (int azkarId in item?.adhkarIds ?? []) {
+      makeProgress(adhkarId: azkarId, itemId: item?.id);
     }
 
-    if (item.detailEn == null && item.detailBn == null)
+    if (item?.detailEn == null && item?.detailBn == null)
       return false;
     else {
       return true;
@@ -167,12 +167,12 @@ class HomeBloc extends BaseBloc {
   /// Item Details
   ScrollController scrollController = ScrollController();
 
-  int _itemPos;
-  int get itemPos => _itemPos;
+  int? _itemPos;
+  int? get itemPos => _itemPos;
   set itemPos(position) => _itemPos = position;
 
-  AdhkarItem _item = AdhkarItem();
-  AdhkarItem get item => _item;
+  AdhkarItem? _item = AdhkarItem();
+  AdhkarItem? get item => _item;
   set item(adhkarItem) => _item = adhkarItem;
 
   String get title =>
@@ -183,12 +183,12 @@ class HomeBloc extends BaseBloc {
       : _item?.detailEn ?? Detail();
 
   Future<void> share() async => await FlutterShare.share(
-        title: (title.isNotEmpty ?? false) ? title : null,
+        title: title,
         text: buildText(),
-        chooserTitle: (title.isNotEmpty ?? false) ? title : null,
+        chooserTitle: title,
       );
 
-  String buildText() {
+  String? buildText() {
     var itemDetails = StringBuffer();
     if (title.isNotEmpty ?? false) itemDetails.write('\n$title\n');
 
@@ -201,20 +201,20 @@ class HomeBloc extends BaseBloc {
     for (Verse verse in detail.verses ?? []) {
       var verseDetails = StringBuffer();
 
-      if (verse?.title?.isNotEmpty ?? false)
+      if (verse.title?.isNotEmpty ?? false)
         verseDetails.write('\n${verse.title}\n');
 
-      if (verse?.times?.isNotEmpty ?? false)
+      if (verse.times?.isNotEmpty ?? false)
         verseDetails.write('\n${verse.times}\n');
 
-      if (verse?.arabic?.isNotEmpty ?? false)
+      if (verse.arabic?.isNotEmpty ?? false)
         verseDetails.write('\n${verse.arabic}\n');
 
-      if (verse?.pronounce?.isNotEmpty ?? false)
-        verseDetails.write('\n${Str.current.pronounce} ${verse.pronounce}\n');
+      if (verse.pronounce?.isNotEmpty ?? false)
+        verseDetails.write('\n${Str.current!.pronounce} ${verse.pronounce}\n');
 
-      if (verse?.meaning?.isNotEmpty ?? false)
-        verseDetails.write('\n${Str.current.meaning} ${verse.meaning}\n');
+      if (verse.meaning?.isNotEmpty ?? false)
+        verseDetails.write('\n${Str.current!.meaning} ${verse.meaning}\n');
 
       if (verseDetails.toString().isNotEmpty ?? false)
         itemDetails.write('${verseDetails.toString()}\n');
@@ -232,10 +232,10 @@ class HomeBloc extends BaseBloc {
   }
 
   Future<bool> previous() async {
-    int curPos = _itemPos;
+    int curPos = _itemPos!;
     int prePos = curPos - 1;
     if (prePos >= 0) {
-      AdhkarItem item = _adhkar.items[prePos];
+      AdhkarItem item = _adhkar.items![prePos];
       if (item.detailEn == null && item.detailBn == null) return false;
       scrollController.jumpTo(scrollController.position.minScrollExtent);
       this.itemPos = prePos;
@@ -247,11 +247,11 @@ class HomeBloc extends BaseBloc {
   }
 
   Future<bool> next() async {
-    int curPos = _itemPos;
+    int curPos = _itemPos!;
     int nextPos = curPos + 1;
-    int total = _adhkar?.items?.length ?? 0;
+    int total = _adhkar.items?.length ?? 0;
     if (nextPos < total) {
-      AdhkarItem item = _adhkar.items[nextPos];
+      AdhkarItem item = _adhkar.items![nextPos];
       if (item.detailEn == null && item.detailBn == null) return false;
       scrollController.jumpTo(scrollController.position.minScrollExtent);
       this.itemPos = nextPos;

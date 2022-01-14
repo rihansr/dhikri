@@ -14,16 +14,16 @@ class Weekday extends Equatable {
     this.status,
   });
 
-  int id;
-  String dayBn;
-  String dayEn;
-  bool status;
+  int? id;
+  String? dayBn;
+  String? dayEn;
+  bool? status;
 
   Weekday copyWith({
-    int id,
-    String dayBn,
-    String dayEn,
-    bool status,
+    int? id,
+    String? dayBn,
+    String? dayEn,
+    bool? status,
   }) =>
       Weekday(
         id: id ?? this.id,
@@ -47,5 +47,5 @@ class Weekday extends Equatable {
       };
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }

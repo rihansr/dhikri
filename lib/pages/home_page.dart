@@ -34,13 +34,13 @@ class HomePage extends StatelessWidget {
         child: Scaffold(
           key: _key,
           appBar: AppBarWidget(
-            title: Str.of(context).appName,
+            title: Str.of(context)!.appName,
             fontSize: dimen.fontSize_36,
             fontWeight: FontWeight.w900,
             fontColor: color.homeDisabledColor,
             leadingIcon: Icons.menu,
             iconTint: color.homeDisabledColor,
-            onTapLeading: () => _key.currentState.openDrawer(),
+            onTapLeading: () => _key.currentState!.openDrawer(),
           ),
           drawer: DrawerWidget(
             bloc: bloc,
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          Str.of(context).progress,
+                          Str.of(context)!.progress,
                           textAlign: TextAlign.center,
                           style: style.titleStyle.copyWith(
                             color: Colors.black,
@@ -146,19 +146,19 @@ class HomePage extends StatelessWidget {
 
 class WeekdayWidget extends StatelessWidget {
   const WeekdayWidget({
-    Key key,
-    @required this.weekDay,
+    Key? key,
+    required this.weekDay,
     this.onCheck,
   }) : super(key: key);
 
   final Weekday weekDay;
-  final Function(Weekday) onCheck;
+  final Function(Weekday)? onCheck;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onCheck != null) onCheck(this.weekDay);
+        if (onCheck != null) onCheck!(this.weekDay);
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 9,
@@ -183,7 +183,7 @@ class WeekdayWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: weekDay.status == null
                     ? color.homeSecondaryColor.withOpacity(.25)
-                    : weekDay.status
+                    : weekDay.status!
                         ? color.homeEnabledColor
                         : Colors.red,
                 borderRadius:
@@ -195,7 +195,7 @@ class WeekdayWidget extends StatelessWidget {
                       width: dimen.iconSize_14,
                     )
                   : Icon(
-                      weekDay.status ? Icons.check : Icons.clear,
+                      weekDay.status! ? Icons.check : Icons.clear,
                       color: color.homeDisabledColor,
                       size: dimen.iconSize_14,
                     ),
@@ -210,11 +210,11 @@ class WeekdayWidget extends StatelessWidget {
 }
 
 class AdhkarWidget extends StatelessWidget {
-  final Adhkar adhkar;
-  final Function(Adhkar) onSelect;
+  final Adhkar? adhkar;
+  final Function(Adhkar?)? onSelect;
 
   const AdhkarWidget({
-    Key key,
+    Key? key,
     this.adhkar,
     this.onSelect,
   }) : super(key: key);
@@ -223,7 +223,7 @@ class AdhkarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onSelect != null) onSelect(this.adhkar);
+        if (onSelect != null) onSelect!(this.adhkar);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: dimen.margin_24),

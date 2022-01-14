@@ -5,26 +5,26 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 
-class AppBarWidget extends PreferredSize {
-  final String title;
-  final bool centerTitle;
-  final Color background;
-  final Brightness brightness;
-  final TextStyle fontStyle;
-  final Color fontColor;
-  final FontWeight fontWeight;
-  final double fontSize;
-  final IconData leadingIcon;
-  final Widget leadingWidget;
-  final IconData trailingIcon;
-  final Widget trailingWidget;
-  final Color iconTint;
-  final double iconSize;
-  final double elevation;
-  final Function onTapLeading;
-  final Function onTapTrailing;
+class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
+  final String? title;
+  final bool? centerTitle;
+  final Color? background;
+  final Brightness? brightness;
+  final TextStyle? fontStyle;
+  final Color? fontColor;
+  final FontWeight? fontWeight;
+  final double? fontSize;
+  final IconData? leadingIcon;
+  final Widget? leadingWidget;
+  final IconData? trailingIcon;
+  final Widget? trailingWidget;
+  final Color? iconTint;
+  final double? iconSize;
+  final double? elevation;
+  final Function? onTapLeading;
+  final Function? onTapTrailing;
 
-  AppBarWidget({
+  const AppBarWidget({
     this.title,
     this.centerTitle = true,
     this.background,
@@ -42,7 +42,7 @@ class AppBarWidget extends PreferredSize {
     this.elevation = 0,
     this.onTapLeading,
     this.onTapTrailing,
-  });
+  }) : super();
 
   @override
   Size get preferredSize => Size.fromHeight(58);
@@ -69,7 +69,7 @@ class AppBarWidget extends PreferredSize {
                 if (this.onTapLeading == null)
                   Navigator.pop(context);
                 else
-                  this.onTapLeading();
+                  this.onTapLeading!();
               },
               child: this.leadingWidget ??
                   Icon(
@@ -84,7 +84,7 @@ class AppBarWidget extends PreferredSize {
       actions: [
         this.trailingIcon != null || this.trailingWidget != null
             ? InkWell(
-                onTap: this.onTapTrailing,
+                onTap: this.onTapTrailing as void Function()?,
                 child: this.trailingWidget ??
                     Icon(
                       this.trailingIcon,

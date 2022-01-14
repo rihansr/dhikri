@@ -7,7 +7,7 @@ import 'package:dhikri/values/colors.dart';
 import 'package:dhikri/widgets/appbar_widget.dart';
 
 class WebPage extends StatefulWidget {
-  final String link;
+  final String? link;
 
   WebPage(this.link);
 
@@ -18,7 +18,7 @@ class WebPage extends StatefulWidget {
 class _WebPageState extends State<WebPage> {
   final GlobalKey webViewKey = GlobalKey();
 
-  InAppWebViewController webViewController;
+  InAppWebViewController? webViewController;
   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
       crossPlatform: InAppWebViewOptions(
         useShouldOverrideUrlLoading: true,
@@ -31,7 +31,7 @@ class _WebPageState extends State<WebPage> {
         allowsInlineMediaPlayback: true,
       ));
 
-  PullToRefreshController pullToRefreshController;
+  PullToRefreshController? pullToRefreshController;
   String url = "";
   double progress = 0;
 
@@ -91,7 +91,7 @@ class _WebPageState extends State<WebPage> {
                     action: PermissionRequestResponseAction.GRANT);
               },
               shouldOverrideUrlLoading: (controller, navigationAction) async {
-                var uri = navigationAction.request.url;
+                var uri = navigationAction.request.url!;
 
                 if (![
                   "http",
@@ -115,17 +115,17 @@ class _WebPageState extends State<WebPage> {
                 return NavigationActionPolicy.ALLOW;
               },
               onLoadStop: (controller, url) async {
-                pullToRefreshController.endRefreshing();
+                pullToRefreshController!.endRefreshing();
                 setState(() {
                   this.url = url.toString();
                 });
               },
               onLoadError: (controller, url, code, message) {
-                pullToRefreshController.endRefreshing();
+                pullToRefreshController!.endRefreshing();
               },
               onProgressChanged: (controller, progress) {
                 if (progress == 100) {
-                  pullToRefreshController.endRefreshing();
+                  pullToRefreshController!.endRefreshing();
                 }
                 setState(() {
                   this.progress = progress / 100;

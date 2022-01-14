@@ -15,11 +15,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DrawerWidget extends StatelessWidget {
-  final HomeBloc bloc;
-  final Gradient backgroundColor;
-  final Color contentColor;
+  final HomeBloc? bloc;
+  final Gradient? backgroundColor;
+  final Color? contentColor;
   const DrawerWidget({
-    Key key,
+    Key? key,
     this.bloc,
     this.backgroundColor,
     this.contentColor,
@@ -54,16 +54,16 @@ class DrawerWidget extends StatelessWidget {
                 children: [
                   DrawerItem(
                     icon: drawable.drawerDuaIcon,
-                    label: Str.of(context).drawerAllDuas,
+                    label: Str.of(context)!.drawerAllDuas,
                     contentColor: contentColor,
                     onTap: () => Navigator.of(context).pushNamed(
                       kItemsRoute,
-                      arguments: [bloc, bloc.allDuas],
+                      arguments: [bloc, bloc!.allDuas],
                     ),
                   ),
                   DrawerItem(
                     icon: drawable.drawerMasalaIcon,
-                    label: Str.of(context).drawerMasala,
+                    label: Str.of(context)!.drawerMasala,
                     contentColor: contentColor,
                     onTap: () => showFullScreenDialog(
                       context: context,
@@ -72,7 +72,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   DrawerItem(
                     icon: drawable.drawerSettingsIcon,
-                    label: Str.of(context).drawerSettings,
+                    label: Str.of(context)!.drawerSettings,
                     contentColor: contentColor,
                     onTap: () => showFullScreenDialog(
                       context: context,
@@ -81,7 +81,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   DrawerItem(
                     icon: drawable.drawerAboutUsIcon,
-                    label: Str.of(context).drawerAboutUs,
+                    label: Str.of(context)!.drawerAboutUs,
                     contentColor: contentColor,
                     onTap: () => showFullScreenDialog(
                       context: context,
@@ -90,7 +90,7 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   DrawerItem(
                     icon: drawable.drawerExitIcon,
-                    label: Str.of(context).drawerExit,
+                    label: Str.of(context)!.drawerExit,
                     contentColor: contentColor,
                     onTap: () =>
                         Platform.isAndroid ? SystemNavigator.pop() : exit(0),
@@ -100,7 +100,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             SizedBox(height: dimen.margin_16),
             Text(
-              Str.of(context).copyright,
+              Str.of(context)!.copyright,
               textAlign: TextAlign.start,
               style: style.labelStyle.copyWith(
                 color: contentColor,
@@ -118,12 +118,12 @@ class DrawerWidget extends StatelessWidget {
 class DrawerItem extends StatelessWidget {
   final String icon;
   final String label;
-  final Function onTap;
-  final Color contentColor;
+  final Function? onTap;
+  final Color? contentColor;
   const DrawerItem({
-    Key key,
-    @required this.icon,
-    @required this.label,
+    Key? key,
+    required this.icon,
+    required this.label,
     this.onTap,
     this.contentColor,
   }) : super(key: key);
@@ -135,7 +135,7 @@ class DrawerItem extends StatelessWidget {
       child: InkWell(
         onTap: () {
           Navigator.of(context).pop();
-          if (onTap != null) onTap();
+          if (onTap != null) onTap!();
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

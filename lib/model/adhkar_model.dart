@@ -26,32 +26,32 @@ class Adhkar extends Equatable {
     this.items,
   });
 
-  int id;
-  String titleBn;
-  String titleEn;
-  Color contentColor;
-  String backdrop;
-  LinearGradient background;
-  Color itemsBackground;
-  View itemView;
-  double progress;
-  Brightness brightness;
-  List<int> weekdays;
-  List<AdhkarItem> items;
+  int? id;
+  String? titleBn;
+  String? titleEn;
+  Color? contentColor;
+  String? backdrop;
+  LinearGradient? background;
+  Color? itemsBackground;
+  View? itemView;
+  double? progress;
+  Brightness? brightness;
+  List<int>? weekdays;
+  List<AdhkarItem>? items;
 
   Adhkar copyWith({
-    int id,
-    String titleBn,
-    String titleEn,
-    Color contentColor,
-    String backdrop,
-    LinearGradient background,
-    Color itemsBackground,
-    View itemView,
-    double progress,
-    Brightness brightness,
-    List<int> weekdays,
-    List<AdhkarItem> items,
+    int? id,
+    String? titleBn,
+    String? titleEn,
+    Color? contentColor,
+    String? backdrop,
+    LinearGradient? background,
+    Color? itemsBackground,
+    View? itemView,
+    double? progress,
+    Brightness? brightness,
+    List<int>? weekdays,
+    List<AdhkarItem>? items,
   }) =>
       Adhkar(
         id: id ?? this.id,
@@ -59,8 +59,8 @@ class Adhkar extends Equatable {
         titleEn: titleEn ?? this.titleEn,
         contentColor: contentColor ?? this.contentColor,
         backdrop: backdrop ?? this.backdrop,
-        background: backdrop ?? this.background,
-        itemsBackground: backdrop ?? this.itemsBackground,
+        background: backdrop as LinearGradient? ?? this.background,
+        itemsBackground: backdrop as Color? ?? this.itemsBackground,
         itemView: itemView ?? this.itemView,
         progress: progress ?? this.progress,
         brightness: brightness ?? this.brightness,
@@ -103,14 +103,14 @@ class Adhkar extends Equatable {
         "brightness": brightness == null ? null : brightness,
         "weekdays": weekdays == null
             ? null
-            : List<dynamic>.from(weekdays.map((x) => x)),
+            : List<dynamic>.from(weekdays!.map((x) => x)),
         "items": items == null
             ? null
-            : List<dynamic>.from(items.map((x) => x.toJson())),
+            : List<dynamic>.from(items!.map((x) => x.toJson())),
       };
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }
 
 // ignore: must_be_immutable
@@ -126,24 +126,24 @@ class AdhkarItem extends Equatable {
     this.read = false,
   });
 
-  int id;
-  List<int> adhkarIds;
-  String icon;
-  String titleBn;
-  String titleEn;
-  Detail detailBn;
-  Detail detailEn;
-  bool read;
+  int? id;
+  List<int>? adhkarIds;
+  String? icon;
+  String? titleBn;
+  String? titleEn;
+  Detail? detailBn;
+  Detail? detailEn;
+  bool? read;
 
   AdhkarItem copyWith({
-    int id,
-    List<int> azkarIds,
-    String icon,
-    String titleBn,
-    String titleEn,
-    Detail detailBn,
-    Detail detailEn,
-    bool read,
+    int? id,
+    List<int>? azkarIds,
+    String? icon,
+    String? titleBn,
+    String? titleEn,
+    Detail? detailBn,
+    Detail? detailEn,
+    bool? read,
   }) =>
       AdhkarItem(
         id: id ?? this.id,
@@ -177,17 +177,17 @@ class AdhkarItem extends Equatable {
         "id": id == null ? null : id,
         "adhkar_ids": adhkarIds == null
             ? null
-            : List<dynamic>.from(adhkarIds.map((x) => x)),
+            : List<dynamic>.from(adhkarIds!.map((x) => x)),
         "icon": icon == null ? null : icon,
         "title_bn": titleBn == null ? null : titleBn,
         "title_en": titleEn == null ? null : titleEn,
-        "detail_bn": detailBn == null ? null : detailBn.toJson(),
-        "detail_en": detailEn == null ? null : detailEn.toJson(),
+        "detail_bn": detailBn == null ? null : detailBn!.toJson(),
+        "detail_en": detailEn == null ? null : detailEn!.toJson(),
         "read": read == null ? null : read,
       };
 
   @override
-  List<Object> get props => [id];
+  List<Object?> get props => [id];
 }
 
 class Detail {
@@ -199,18 +199,18 @@ class Detail {
     this.explanation,
   });
 
-  String title;
-  String times;
-  String source;
-  List<Verse> verses;
-  String explanation;
+  String? title;
+  String? times;
+  String? source;
+  List<Verse>? verses;
+  String? explanation;
 
   Detail copyWith({
-    String title,
-    String times,
-    List<Verse> verses,
-    String source,
-    String explanation,
+    String? title,
+    String? times,
+    List<Verse>? verses,
+    String? source,
+    String? explanation,
   }) =>
       Detail(
         title: title ?? this.title,
@@ -235,7 +235,7 @@ class Detail {
         "times": times == null ? null : times,
         "verses": verses == null
             ? null
-            : List<dynamic>.from(verses.map((x) => x.toJson())),
+            : List<dynamic>.from(verses!.map((x) => x.toJson())),
         "source": source == null ? null : source,
         "explanation": explanation == null ? null : explanation,
       };
@@ -251,20 +251,20 @@ class Verse {
     this.meaning,
   });
 
-  int id;
-  String title;
-  String times;
-  String arabic;
-  String pronounce;
-  String meaning;
+  int? id;
+  String? title;
+  String? times;
+  String? arabic;
+  String? pronounce;
+  String? meaning;
 
   Verse copyWith({
-    int id,
-    String title,
-    String times,
-    String arabic,
-    String pronounce,
-    String meaning,
+    int? id,
+    String? title,
+    String? times,
+    String? arabic,
+    String? pronounce,
+    String? meaning,
   }) =>
       Verse(
         id: id ?? this.id,

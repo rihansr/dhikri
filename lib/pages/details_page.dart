@@ -11,12 +11,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class DetailsPage extends StatelessWidget {
-  final HomeBloc homeBloc;
-  final int itemPos;
-  final AdhkarItem item;
+  final HomeBloc? homeBloc;
+  final int? itemPos;
+  final AdhkarItem? item;
 
   const DetailsPage({
-    Key key,
+    Key? key,
     this.homeBloc,
     this.itemPos,
     this.item,
@@ -208,7 +208,7 @@ class DetailsPage extends StatelessWidget {
                                                       ?.pronounce?.isNotEmpty ??
                                                   false)
                                                 Text(
-                                                  Str.of(context).pronounce,
+                                                  Str.of(context)!.pronounce,
                                                   textAlign: TextAlign.center,
                                                   style:
                                                       style.labelStyle.copyWith(
@@ -235,7 +235,7 @@ class DetailsPage extends StatelessWidget {
                                               if (verse?.meaning?.isNotEmpty ??
                                                   false)
                                                 Text(
-                                                  Str.of(context).meaning,
+                                                  Str.of(context)!.meaning,
                                                   textAlign: TextAlign.center,
                                                   style:
                                                       style.labelStyle.copyWith(
@@ -308,7 +308,7 @@ class DetailsPage extends StatelessWidget {
                                 icon: Icons.arrow_back_ios_rounded,
                                 onPressed: () => bloc.previous().then((listen) {
                                   if (listen) {
-                                    bloc.itemDetails(context, bloc.item);
+                                    bloc.itemDetails(context, bloc.item!);
                                   }
                                 }),
                               ),
@@ -316,7 +316,7 @@ class DetailsPage extends StatelessWidget {
                                 icon: Icons.arrow_forward_ios_rounded,
                                 onPressed: () => bloc.next().then((listen) {
                                   if (listen) {
-                                    bloc.itemDetails(context, bloc.item);
+                                    bloc.itemDetails(context, bloc.item!);
                                   }
                                 }),
                               ),
@@ -338,9 +338,9 @@ class DetailsPage extends StatelessWidget {
 
 class IconButtonWidget extends StatelessWidget {
   const IconButtonWidget({
-    Key key,
-    @required this.icon,
-    @required this.onPressed,
+    Key? key,
+    required this.icon,
+    required this.onPressed,
   }) : super(key: key);
 
   final IconData icon;
@@ -359,7 +359,7 @@ class IconButtonWidget extends StatelessWidget {
         this.icon,
         color: Colors.white70,
       ),
-      onPressed: this.onPressed,
+      onPressed: this.onPressed as void Function()?,
     );
   }
 }

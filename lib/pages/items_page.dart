@@ -18,9 +18,9 @@ class ItemsPage extends StatelessWidget {
   final Adhkar azkar;
 
   const ItemsPage({
-    Key key,
-    @required this.homeBloc,
-    @required this.azkar,
+    Key? key,
+    required this.homeBloc,
+    required this.azkar,
   }) : super(key: key);
 
   @override
@@ -62,7 +62,7 @@ class ItemsPage extends StatelessWidget {
                       itemBuilder: (_, i) {
                         return ListWidget(
                           background: bloc.adhkar.itemsBackground,
-                          item: bloc.adhkar?.items[i] ?? AdhkarItem(),
+                          item: bloc.adhkar?.items![i] ?? AdhkarItem(),
                           onSelect: (item) async =>
                               bloc.itemDetails(context, item).then((listen) {
                             if (listen)
@@ -92,7 +92,7 @@ class ItemsPage extends StatelessWidget {
                       itemBuilder: (_, i) {
                         return GridWidget(
                           background: bloc.adhkar.itemsBackground,
-                          item: bloc.adhkar?.items[i] ?? AdhkarItem(),
+                          item: bloc.adhkar?.items![i] ?? AdhkarItem(),
                           onSelect: (item) async =>
                               bloc.itemDetails(context, item).then((listen) {
                             if (listen)
@@ -114,12 +114,12 @@ class ItemsPage extends StatelessWidget {
 }
 
 class ListWidget extends StatelessWidget {
-  final Color background;
-  final AdhkarItem item;
-  final Function(AdhkarItem) onSelect;
+  final Color? background;
+  final AdhkarItem? item;
+  final Function(AdhkarItem?)? onSelect;
 
   ListWidget({
-    Key key,
+    Key? key,
     this.item,
     this.onSelect,
     this.background,
@@ -134,7 +134,7 @@ class ListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onSelect != null) onSelect(this.item);
+        if (onSelect != null) onSelect!(this.item);
       },
       child: Container(
         margin: EdgeInsets.only(left: dimen.margin_16, right: dimen.margin_32),
@@ -144,7 +144,7 @@ class ListWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           children: [
             Icon(
-              item.read ? Icons.check_circle : Icons.radio_button_unchecked,
+              item!.read! ? Icons.check_circle : Icons.radio_button_unchecked,
               color: this.background,
             ),
             SizedBox(width: dimen.margin_4),
@@ -196,12 +196,12 @@ class ListWidget extends StatelessWidget {
 }
 
 class GridWidget extends StatelessWidget {
-  final Color background;
-  final AdhkarItem item;
-  final Function(AdhkarItem) onSelect;
+  final Color? background;
+  final AdhkarItem? item;
+  final Function(AdhkarItem?)? onSelect;
 
   GridWidget({
-    Key key,
+    Key? key,
     this.item,
     this.onSelect,
     this.background,
@@ -216,7 +216,7 @@ class GridWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onSelect != null) onSelect(this.item);
+        if (onSelect != null) onSelect!(this.item);
       },
       child: Container(
         padding: EdgeInsets.symmetric(

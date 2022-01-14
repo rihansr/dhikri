@@ -14,15 +14,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AboutPage extends StatelessWidget {
-  final Function callback;
+  final Function? callback;
 
-  AboutPage({Key key, this.callback}) : super(key: key);
+  AboutPage({Key? key, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: Str.of(context).drawerAboutUs,
+        title: Str.of(context)!.drawerAboutUs,
         fontColor: color.homeDisabledColor,
         leadingIcon: Icons.arrow_back,
         iconTint: color.homeDisabledColor,
@@ -48,7 +48,7 @@ class AboutPage extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(dimen.margin_12,
                             dimen.margin_16, dimen.margin_12, dimen.margin_10),
                         child: AutoSizeText(
-                          Str.current.websiteName,
+                          Str.current!.websiteName,
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: style.headlineTitleStyle.copyWith(
@@ -88,7 +88,7 @@ class AboutPage extends StatelessWidget {
               padding: EdgeInsets.only(
                   top: dimen.padding_12, bottom: dimen.padding_24),
               child: Text(
-                Str.of(context).copyright,
+                Str.of(context)!.copyright,
                 textAlign: TextAlign.center,
                 style: style.labelStyle.copyWith(
                   color: Colors.white,
@@ -105,12 +105,12 @@ class AboutPage extends StatelessWidget {
 }
 
 class ItemWidget extends StatelessWidget {
-  final String icon;
-  final String text;
-  final Function onTap;
+  final String? icon;
+  final String? text;
+  final Function? onTap;
 
   const ItemWidget({
-    Key key,
+    Key? key,
     this.icon,
     this.text,
     this.onTap,
@@ -119,7 +119,7 @@ class ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: onTap as void Function()?,
       child: Container(
         margin: EdgeInsets.symmetric(
             vertical: dimen.margin_6, horizontal: dimen.margin_12),
@@ -137,7 +137,7 @@ class ItemWidget extends StatelessWidget {
                     Radius.circular(dimen.radius_16),
                   )),
               child: SvgPicture.asset(
-                this.icon,
+                this.icon!,
                 color: color.homePrimaryColor,
                 height: dimen.iconSize_10,
                 width: dimen.iconSize_10,

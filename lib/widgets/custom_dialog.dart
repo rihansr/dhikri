@@ -5,30 +5,30 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 class CustomDialog extends StatelessWidget {
-  final double width;
-  final String title;
-  final EdgeInsets padding;
-  final TextAlign titleAlign;
-  final TextStyle titleFontStyle;
-  final Color titleFontColor;
+  final double? width;
+  final String? title;
+  final EdgeInsets? padding;
+  final TextAlign? titleAlign;
+  final TextStyle? titleFontStyle;
+  final Color? titleFontColor;
   final double titleFontSize;
-  final String subtitle;
-  final TextAlign subtitleAlign;
-  final TextStyle subtitleFontStyle;
-  final Color subtitleFontColor;
+  final String? subtitle;
+  final TextAlign? subtitleAlign;
+  final TextStyle? subtitleFontStyle;
+  final Color? subtitleFontColor;
   final double subtitleFontSize;
-  final String negativeButtonTitle;
-  final String positiveButtonTitle;
-  final TextStyle buttonFontStyle;
-  final Color buttonFontColor;
+  final String? negativeButtonTitle;
+  final String? positiveButtonTitle;
+  final TextStyle? buttonFontStyle;
+  final Color? buttonFontColor;
   final double buttonFontSize;
   final Axis buttonDirection;
-  final Color buttonBackground;
-  final Function onNegativeButtonClicked;
-  final Function onPositiveButtonClicked;
+  final Color? buttonBackground;
+  final Function? onNegativeButtonClicked;
+  final Function? onPositiveButtonClicked;
 
   const CustomDialog({
-    Key key,
+    Key? key,
     this.width,
     this.title,
     this.padding,
@@ -86,7 +86,7 @@ class CustomDialog extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: 12.0),
                 child: AutoSizeText(
-                  title,
+                  title!,
                   textAlign: titleAlign ?? TextAlign.center,
                   minFontSize: (titleFontSize - 2),
                   style: titleFontStyle ??
@@ -102,7 +102,7 @@ class CustomDialog extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.only(bottom: 16.0),
                 child: AutoSizeText(
-                  subtitle,
+                  subtitle!,
                   minFontSize: subtitleFontSize - 1,
                   textAlign: subtitleAlign ?? TextAlign.start,
                   style: subtitleFontStyle ??
@@ -125,13 +125,13 @@ class CustomDialog extends StatelessWidget {
                     if (negativeButtonTitle?.isNotEmpty ?? false)
                       Expanded(
                         flex: 1,
-                        child: actionButton(context, negativeButtonTitle,
+                        child: actionButton(context, negativeButtonTitle!,
                             onNegativeButtonClicked),
                       ),
                     if (positiveButtonTitle?.isNotEmpty ?? false)
                       Expanded(
                         flex: 1,
-                        child: actionButton(context, positiveButtonTitle,
+                        child: actionButton(context, positiveButtonTitle!,
                             onPositiveButtonClicked),
                       ),
                   ],
@@ -146,10 +146,10 @@ class CustomDialog extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (positiveButtonTitle?.isNotEmpty ?? false)
-                      actionButton(context, positiveButtonTitle,
+                      actionButton(context, positiveButtonTitle!,
                           onPositiveButtonClicked),
                     if (negativeButtonTitle?.isNotEmpty ?? false)
-                      actionButton(context, negativeButtonTitle,
+                      actionButton(context, negativeButtonTitle!,
                           onNegativeButtonClicked),
                   ],
                 ),
@@ -160,7 +160,7 @@ class CustomDialog extends StatelessWidget {
     );
   }
 
-  Widget actionButton(BuildContext context, String label, Function function) {
+  Widget actionButton(BuildContext context, String label, Function? function) {
     return Container(
       decoration: BoxDecoration(
         color: buttonBackground ?? Colors.transparent,
@@ -188,9 +188,9 @@ class CustomDialog extends StatelessWidget {
 }
 
 showFullScreenDialog({
-  @required BuildContext context,
-  @required Widget child,
-  LinearGradient background,
+  required BuildContext context,
+  required Widget child,
+  LinearGradient? background,
   bool dismissible = true,
   bool isLightTheme = true,
 }) {
@@ -236,7 +236,7 @@ showFullScreenDialog({
 }
 
 Future<void> showDialogBox(
-    {BuildContext context, Widget child, bool dismissible = true}) {
+    {required BuildContext context, Widget? child, bool dismissible = true}) {
   return showGeneralDialog(
     context: context,
     transitionBuilder: (context, a1, a2, widget) {
@@ -257,7 +257,7 @@ Future<void> showDialogBox(
     pageBuilder: (BuildContext buildContext, Animation<double> animation,
         Animation<double> secondaryAnimation) {
       return null;
-    },
+    } as Widget Function(BuildContext, Animation<double>, Animation<double>),
     barrierDismissible: dismissible,
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: Colors.black26,

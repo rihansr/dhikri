@@ -126,7 +126,7 @@ class Data {
   );
 }
 
-List<AdhkarItem> _getAdhkars({@required id}) {
+List<AdhkarItem> _getAdhkars({required id}) {
   List<AdhkarItem> items = [];
   int count = 0;
 
@@ -139,11 +139,11 @@ List<AdhkarItem> _getAdhkars({@required id}) {
           azkarIds: [id],
           titleBn: 'দুআ #${extension.digitConversion(count)}',
           titleEn: 'Dua #$count',
-          read: isRead(item.id, item.adhkarIds),
+          read: isRead(item.id, item.adhkarIds!),
         ));
       } else
         items.add(item
-            .copyWith(azkarIds: [id], read: isRead(item.id, item.adhkarIds)));
+            .copyWith(azkarIds: [id], read: isRead(item.id, item.adhkarIds!)));
     }
   }
 
@@ -155,13 +155,13 @@ List<AdhkarItem> _allAdhkars() {
 
   for (AdhkarItem item in _adhkars) {
     if (item.detailEn == null && item.detailBn == null) continue;
-    items.add(item.copyWith(read: isRead(item.id, item.adhkarIds)));
+    items.add(item.copyWith(read: isRead(item.id, item.adhkarIds!)));
   }
 
   return items;
 }
 
-bool isRead(int itemId, List<int> adhkarIds) {
+bool isRead(int? itemId, List<int> adhkarIds) {
   for (int adhkarId in adhkarIds) {
     bool readToday = dateTimeHelper.itsToday(
         date: preferenceManager.getReadItem(key: '${adhkarId}_$itemId'));

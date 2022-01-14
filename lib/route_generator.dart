@@ -15,7 +15,7 @@ const String kWebPageRoute = '/webPage';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    List<dynamic> args = settings.arguments;
+    List<dynamic>? args = settings.arguments as List<dynamic>?;
 
     switch (settings.name) {
       case kHomeRoute:
@@ -23,13 +23,13 @@ class RouterGenerator {
       case kItemsRoute:
         return MaterialPageRoute(
             builder: (_) => ItemsPage(
-                  homeBloc: args[0] as HomeBloc,
+                  homeBloc: args![0] as HomeBloc,
                   azkar: args[1] as Adhkar,
                 ));
       case kDetailsRoute:
         return MaterialPageRoute(
             builder: (_) => DetailsPage(
-                  homeBloc: args[0] as HomeBloc,
+                  homeBloc: args![0] as HomeBloc,
                   itemPos: args[1] as int,
                   item: args[2] as AdhkarItem,
                 ));

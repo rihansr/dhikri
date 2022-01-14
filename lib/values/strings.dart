@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 class Str implements WidgetsLocalizations {
   const Str();
 
-  static Str current;
+  static Str? current;
 
   static const GeneratedLocalizationsDelegate delegate =
       GeneratedLocalizationsDelegate();
 
-  static Str of(BuildContext context) => Localizations.of<Str>(context, Str);
+  static Str? of(BuildContext context) => Localizations.of<Str>(context, Str);
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -100,7 +100,7 @@ class $en extends Str {
       "\n\nAbove all, Allah knows the best.";
 }
 
-class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str> {
+class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str?> {
   const GeneratedLocalizationsDelegate();
 
   List<Locale> get supportedLocales {
@@ -111,8 +111,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str> {
   }
 
   LocaleListResolutionCallback listResolution(
-      {Locale fallback, bool withCountry = true}) {
-    return (List<Locale> locales, Iterable<Locale> supported) {
+      {Locale? fallback, bool withCountry = true}) {
+    return (List<Locale>? locales, Iterable<Locale> supported) {
       if (locales == null || locales.isEmpty) {
         return fallback ?? supported.first;
       } else {
@@ -122,25 +122,23 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str> {
   }
 
   LocaleResolutionCallback resolution(
-      {Locale fallback, bool withCountry = true}) {
-    return (Locale locale, Iterable<Locale> supported) {
+      {Locale? fallback, bool withCountry = true}) {
+    return (Locale? locale, Iterable<Locale> supported) {
       return _resolve(locale, fallback, supported, withCountry);
     };
   }
 
   @override
-  Future<Str> load(Locale locale) {
-    final String lang = getLang(locale);
-    if (lang != null) {
-      switch (lang) {
-        case 'en':
-          Str.current = const $en();
-          return SynchronousFuture<Str>(Str.current);
-        default:
-      }
+  Future<Str?> load(Locale locale) {
+    final String? lang = getLang(locale);
+    switch (lang) {
+      case 'en':
+        Str.current = const $en();
+        return SynchronousFuture<Str?>(Str.current);
+      default:
     }
     Str.current = const Str();
-    return SynchronousFuture<Str>(Str.current);
+    return SynchronousFuture<Str?>(Str.current);
   }
 
   @override
@@ -150,7 +148,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str> {
   bool shouldReload(GeneratedLocalizationsDelegate old) => false;
 
   /// Internal method to resolve a locale from a list of locales.
-  Locale _resolve(Locale locale, Locale fallback, Iterable<Locale> supported,
+  Locale _resolve(Locale? locale, Locale? fallback, Iterable<Locale> supported,
       bool withCountry) {
     if (locale == null || !_isSupported(locale, withCountry)) {
       return fallback ?? supported.first;
@@ -184,7 +182,7 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str> {
         /// If no country requirement is requested, check if this locale has no country.
         if (true != withCountry &&
             (supportedLocale.countryCode == null ||
-                supportedLocale.countryCode.isEmpty)) {
+                supportedLocale.countryCode!.isEmpty)) {
           return true;
         }
       }
@@ -193,8 +191,8 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str> {
   }
 }
 
-String getLang(Locale locale) => locale == null
+String? getLang(Locale locale) => locale == null
     ? null
-    : locale.countryCode != null && locale.countryCode.isEmpty
+    : locale.countryCode != null && locale.countryCode!.isEmpty
         ? locale.languageCode
         : locale.toString();

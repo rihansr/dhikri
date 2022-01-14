@@ -8,15 +8,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class MasalaPage extends StatelessWidget {
-  final Function callback;
+  final Function? callback;
 
-  MasalaPage({Key key, this.callback}) : super(key: key);
+  MasalaPage({Key? key, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: Str.of(context).drawerMasala,
+        title: Str.of(context)!.drawerMasala,
         fontColor: color.homeDisabledColor,
         leadingIcon: Icons.arrow_back,
         iconTint: color.homeDisabledColor,
@@ -28,7 +28,7 @@ class MasalaPage extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           scrollDirection: Axis.vertical,
           child: AutoSizeText(
-            Str.of(context).masala,
+            Str.of(context)!.masala,
             style: style.headlineTitleStyle.copyWith(
               fontSize: dimen.fontSize_14,
               height: 1.5,

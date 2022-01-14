@@ -10,15 +10,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class SettingsPage extends StatelessWidget {
-  final Function callback;
+  final Function? callback;
 
-  SettingsPage({Key key, this.callback}) : super(key: key);
+  SettingsPage({Key? key, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: Str.of(context).drawerSettings,
+        title: Str.of(context)!.drawerSettings,
         fontColor: color.homeDisabledColor,
         leadingIcon: Icons.arrow_back,
         iconTint: color.homeDisabledColor,
@@ -30,8 +30,8 @@ class SettingsPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SettingsItem(
-              title: Str.of(context).language,
-              subtitle: Str.of(context).currentLanguage,
+              title: Str.of(context)!.language,
+              subtitle: Str.of(context)!.currentLanguage,
               leading: CommunityMaterialIcons.translate,
               value: settings.currentLocale.value.languageCode == 'bn',
               callback: (value) => settings.setLocale(value),
@@ -44,14 +44,14 @@ class SettingsPage extends StatelessWidget {
 }
 
 class SettingsItem extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final IconData leading;
+  final String? title;
+  final String? subtitle;
+  final IconData? leading;
   final dynamic value;
-  final Function(dynamic) callback;
+  final Function(dynamic)? callback;
 
   const SettingsItem({
-    Key key,
+    Key? key,
     this.callback,
     this.title,
     this.subtitle,
@@ -81,7 +81,7 @@ class SettingsItem extends StatelessWidget {
         ),
       ),
       subtitle: AutoSizeText(
-        this.subtitle,
+        this.subtitle!,
         style: style.titleStyle.copyWith(
           color: color.homeDisabledColor,
           fontSize: dimen.fontSize_12,
@@ -91,7 +91,7 @@ class SettingsItem extends StatelessWidget {
         value: this.value,
         trackColor: color.homeDisabledColor.withOpacity(.25),
         onChanged: (value) {
-          if (callback != null) callback(value);
+          if (callback != null) callback!(value);
         },
       ),
     );
