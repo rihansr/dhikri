@@ -5,7 +5,6 @@ import 'package:dhikri/values/strings.dart';
 import 'package:dhikri/values/styles.dart';
 import 'package:dhikri/widgets/appbar_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 class MasalaPage extends StatelessWidget {
   final Function? callback;

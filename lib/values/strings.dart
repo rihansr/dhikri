@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:dhikri/helper/navigation_service.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ class Str implements WidgetsLocalizations {
   static const GeneratedLocalizationsDelegate delegate =
       GeneratedLocalizationsDelegate();
 
-  static Str? of(BuildContext context) => Localizations.of<Str>(context, Str);
+  static Str? of(BuildContext context) =>
+      Localizations.of<Str>(navigator.context, Str);
 
   @override
   TextDirection get textDirection => TextDirection.ltr;
@@ -47,6 +49,24 @@ class Str implements WidgetsLocalizations {
       "\n\n•\tওদু বা মহিলাদের মাথায় কাপড় না থাকলেও এই যিকরগুলাে করতে বাধা নেই।"
       "\n\n•\tমাসিক ও প্রসব পরবর্তী স্রাব চলাকালীন অবস্থাতে বা গােসল ফরয় অবস্থাতেও যিকরগুলাে করা যাবে বলে গ্রহণযােগ্য উলামাগণ মত দিয়েছেন৷"
       "\n\nসর্বোপরি আল্লাহ তা'আলাই ভালাে জানেন।";
+
+  @override
+  String get reorderItemDown => throw UnimplementedError();
+
+  @override
+  String get reorderItemLeft => throw UnimplementedError();
+
+  @override
+  String get reorderItemRight => throw UnimplementedError();
+
+  @override
+  String get reorderItemToEnd => throw UnimplementedError();
+
+  @override
+  String get reorderItemToStart => throw UnimplementedError();
+
+  @override
+  String get reorderItemUp => throw UnimplementedError();
 }
 
 class $en extends Str {
@@ -167,32 +187,29 @@ class GeneratedLocalizationsDelegate extends LocalizationsDelegate<Str?> {
 
   /// Returns true if the specified locale is supported, false otherwise.
   bool _isSupported(Locale locale, bool withCountry) {
-    if (locale != null) {
-      for (Locale supportedLocale in supportedLocales) {
-        /// Language must always match both locales.
-        if (supportedLocale.languageCode != locale.languageCode) {
-          continue;
-        }
+    for (Locale supportedLocale in supportedLocales) {
+      /// Language must always match both locales.
+      if (supportedLocale.languageCode != locale.languageCode) {
+        continue;
+      }
 
-        /// If country code matches, return this locale.
-        if (supportedLocale.countryCode == locale.countryCode) {
-          return true;
-        }
+      /// If country code matches, return this locale.
+      if (supportedLocale.countryCode == locale.countryCode) {
+        return true;
+      }
 
-        /// If no country requirement is requested, check if this locale has no country.
-        if (true != withCountry &&
-            (supportedLocale.countryCode == null ||
-                supportedLocale.countryCode!.isEmpty)) {
-          return true;
-        }
+      /// If no country requirement is requested, check if this locale has no country.
+      if (true != withCountry &&
+          (supportedLocale.countryCode == null ||
+              supportedLocale.countryCode!.isEmpty)) {
+        return true;
       }
     }
     return false;
   }
 }
 
-String? getLang(Locale locale) => locale == null
-    ? null
-    : locale.countryCode != null && locale.countryCode!.isEmpty
+String? getLang(Locale locale) =>
+    locale.countryCode != null && locale.countryCode!.isEmpty
         ? locale.languageCode
         : locale.toString();

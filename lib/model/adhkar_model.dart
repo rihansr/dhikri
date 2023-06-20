@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:equatable/equatable.dart';
 
-enum View { list, grid }
+enum ItemsView { list, grid }
 
 Adhkar adhkarFromJson(String str) => Adhkar.fromJson(json.decode(str));
 
@@ -33,7 +33,7 @@ class Adhkar extends Equatable {
   String? backdrop;
   LinearGradient? background;
   Color? itemsBackground;
-  View? itemView;
+  ItemsView? itemView;
   double? progress;
   Brightness? brightness;
   List<int>? weekdays;
@@ -47,7 +47,7 @@ class Adhkar extends Equatable {
     String? backdrop,
     LinearGradient? background,
     Color? itemsBackground,
-    View? itemView,
+    ItemsView? itemView,
     double? progress,
     Brightness? brightness,
     List<int>? weekdays,

@@ -1,6 +1,4 @@
 import 'package:dhikri/helper/preference_manager.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 final dateTimeHelper = DateTimeHelper.function;
 
@@ -34,7 +32,8 @@ class DateTimeHelper {
     return !isDateContain(start, end, today);
   }
 
-  bool dateInThisWeek({DateTime? start, DateTime? end, required DateTime? date}) {
+  bool dateInThisWeek(
+      {DateTime? start, DateTime? end, required DateTime? date}) {
     start = start ?? preferenceManager.getWeekday(key: firstDayOfWeekKey);
     end = end ?? preferenceManager.getWeekday(key: lastDayOfWeekKey);
     return isDateContain(start, end, date);

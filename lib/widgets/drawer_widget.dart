@@ -10,7 +10,6 @@ import 'package:dhikri/values/strings.dart';
 import 'package:dhikri/values/styles.dart';
 import 'package:dhikri/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -145,7 +144,9 @@ class DrawerItem extends StatelessWidget {
             Center(
               child: SvgPicture.asset(
                 this.icon,
-                color: contentColor ?? Colors.white,
+                theme: SvgTheme(
+                  currentColor: contentColor ?? Colors.white,
+                ),
                 height: dimen.iconSize_18,
                 width: dimen.iconSize_18,
               ),

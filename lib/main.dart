@@ -1,12 +1,12 @@
 import 'package:dhikri/configs/provider_config.dart';
 import 'package:dhikri/configs/settings.dart';
+import 'package:dhikri/helper/navigation_service.dart';
 import 'package:dhikri/helper/preference_manager.dart';
 import 'package:dhikri/route_generator.dart';
 import 'package:dhikri/values/colors.dart';
 import 'package:dhikri/values/drawables.dart';
 import 'package:dhikri/values/strings.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
@@ -44,14 +44,12 @@ class MyApp extends StatelessWidget {
           child: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
               return MaterialApp(
+                scaffoldMessengerKey: navigator.scaffoldMessengerKey,
+                navigatorKey: navigator.navigatorKey,
                 debugShowCheckedModeBanner: false,
                 title: 'Dhikri',
                 theme: ThemeData().copyWith(
-                  appBarTheme: AppBarTheme().copyWith(
-                    brightness: Brightness.dark,
-                  ),
                   brightness: Brightness.light,
-                  backgroundColor: Colors.transparent,
                   scaffoldBackgroundColor: Colors.transparent,
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                 ),

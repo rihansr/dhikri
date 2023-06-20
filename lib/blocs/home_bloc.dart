@@ -12,10 +12,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_share/flutter_share.dart';
 
 class HomeBloc extends BaseBloc {
-  Data _data;
-
-  HomeBloc({required Data data}) : _data = data;
-
   void init() {
     if (dateTimeHelper.itsANewWeek()) {
       preferenceManager.setWeekday(
@@ -36,7 +32,7 @@ class HomeBloc extends BaseBloc {
   UnmodifiableListView<Weekday> get weekdays => UnmodifiableListView(_weekdays);
 
   void setWeekdays() {
-    _weekdays = _data.weekdays;
+    _weekdays = local.weekdays;
     notifyListeners();
   }
 
@@ -91,8 +87,8 @@ class HomeBloc extends BaseBloc {
   UnmodifiableListView<Adhkar> get adhkars => UnmodifiableListView(_adhkars);
 
   void setAdhkars() {
-    _allDuas = (_data.allDuas ?? []) as Adhkar;
-    _adhkars = _data.adhkars ?? [];
+    _allDuas = local.allDuas;
+    _adhkars = local.adhkars;
     notifyListeners();
   }
 
@@ -190,7 +186,7 @@ class HomeBloc extends BaseBloc {
 
   String? buildText() {
     var itemDetails = StringBuffer();
-    if (title.isNotEmpty ?? false) itemDetails.write('\n$title\n');
+    if (title.isNotEmpty) itemDetails.write('\n$title\n');
 
     if (detail.title?.isNotEmpty ?? false)
       itemDetails.write('\n${detail.title}\n');
@@ -216,7 +212,7 @@ class HomeBloc extends BaseBloc {
       if (verse.meaning?.isNotEmpty ?? false)
         verseDetails.write('\n${Str.current!.meaning} ${verse.meaning}\n');
 
-      if (verseDetails.toString().isNotEmpty ?? false)
+      if (verseDetails.toString().isNotEmpty)
         itemDetails.write('${verseDetails.toString()}\n');
     }
 
@@ -226,9 +222,7 @@ class HomeBloc extends BaseBloc {
     if (detail.explanation?.isNotEmpty ?? false)
       itemDetails.write('\n${detail.explanation}');
 
-    return (itemDetails.toString().isNotEmpty ?? false)
-        ? itemDetails.toString()
-        : null;
+    return (itemDetails.toString().isNotEmpty) ? itemDetails.toString() : null;
   }
 
   Future<bool> previous() async {

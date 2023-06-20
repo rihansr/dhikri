@@ -4,10 +4,14 @@ import 'package:dhikri/model/weekday_model.dart';
 import 'package:dhikri/utils/extensions.dart';
 import 'package:dhikri/values/drawables.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'model/adhkar_model.dart';
 
-class Data {
+final LocalData local = LocalData.value;
+
+class LocalData {
+  static LocalData get value => LocalData._();
+  LocalData._();
+
   List<Weekday> weekdays = [
     Weekday(id: 6, dayBn: 'শনি', dayEn: 'Sat'),
     Weekday(id: 7, dayBn: 'রবি', dayEn: 'Sun'),
@@ -34,7 +38,7 @@ class Data {
         ],
       ),
       itemsBackground: Colors.white30,
-      itemView: View.list,
+      itemView: ItemsView.list,
       brightness: Brightness.dark,
       progress: 0,
       weekdays: [6, 7, 1, 2, 3, 4, 5],
@@ -55,7 +59,7 @@ class Data {
         ],
       ),
       itemsBackground: Colors.white38,
-      itemView: View.list,
+      itemView: ItemsView.list,
       brightness: Brightness.dark,
       progress: 0,
       weekdays: [6, 7, 1, 2, 3, 4, 5],
@@ -76,7 +80,7 @@ class Data {
         ],
       ),
       itemsBackground: Colors.white30,
-      itemView: View.list,
+      itemView: ItemsView.list,
       brightness: Brightness.dark,
       progress: 0,
       weekdays: [6, 7, 1, 2, 3, 4, 5],
@@ -97,7 +101,7 @@ class Data {
         ],
       ),
       itemsBackground: Color(0xFF1D989F),
-      itemView: View.list,
+      itemView: ItemsView.list,
       brightness: Brightness.light,
       progress: 0,
       weekdays: [5],
@@ -119,7 +123,7 @@ class Data {
       ],
     ),
     itemsBackground: Colors.white30,
-    itemView: View.list,
+    itemView: ItemsView.list,
     brightness: Brightness.dark,
     weekdays: [6, 7, 1, 2, 3, 4, 5],
     items: _allAdhkars(),
@@ -131,9 +135,9 @@ List<AdhkarItem> _getAdhkars({required id}) {
   int count = 0;
 
   for (AdhkarItem item in _adhkars) {
-    if (item?.adhkarIds?.contains(id) ?? false) {
-      if ((item?.titleBn?.contains('#') ?? false) ||
-          (item?.titleEn?.contains('#') ?? false)) {
+    if (item.adhkarIds?.contains(id) ?? false) {
+      if ((item.titleBn?.contains('#') ?? false) ||
+          (item.titleEn?.contains('#') ?? false)) {
         count += 1;
         items.add(item.copyWith(
           azkarIds: [id],

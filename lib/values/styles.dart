@@ -1,6 +1,5 @@
 import 'package:dhikri/values/dimens.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 final style = Style.value;
 

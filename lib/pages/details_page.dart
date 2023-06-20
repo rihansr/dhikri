@@ -8,7 +8,7 @@ import 'package:dhikri/values/styles.dart';
 import 'package:dhikri/widgets/appbar_widget.dart';
 import 'package:dhikri/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
 
 class DetailsPage extends StatelessWidget {
   final HomeBloc? homeBloc;
@@ -25,14 +25,14 @@ class DetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<HomeBloc>(
-      controller: homeBloc,
-      onReady: (bloc) {
+      model: Provider.of<HomeBloc>(context),
+      onInit: (bloc) {
         bloc.itemPos = itemPos;
         bloc.item = item;
       },
       builder: (context, bloc, child) => Container(
         decoration: BoxDecoration(
-          gradient: bloc.adhkar?.background ?? color.homeScaffoldColor,
+          gradient: bloc.adhkar.background ?? color.homeScaffoldColor,
         ),
         child: SafeArea(
             child: Scaffold(
@@ -49,7 +49,7 @@ class DetailsPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                if (bloc.title.isNotEmpty ?? false)
+                if (bloc.title.isNotEmpty)
                   Container(
                     margin: EdgeInsets.only(bottom: dimen.margin_16),
                     padding: EdgeInsets.symmetric(
@@ -149,13 +149,13 @@ class DetailsPage extends StatelessWidget {
                                                 MainAxisAlignment.start,
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              if (verse?.title?.isNotEmpty ??
+                                              if (verse.title?.isNotEmpty ??
                                                   false)
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       bottom: dimen.padding_8),
                                                   child: AutoSizeText(
-                                                    verse?.title ?? '',
+                                                    verse.title ?? '',
                                                     textAlign: TextAlign.center,
                                                     style: style.titleStyle
                                                         .copyWith(
@@ -163,13 +163,13 @@ class DetailsPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                              if (verse?.times?.isNotEmpty ??
+                                              if (verse.times?.isNotEmpty ??
                                                   false)
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       bottom: dimen.padding_8),
                                                   child: AutoSizeText(
-                                                    verse?.times ?? '',
+                                                    verse.times ?? '',
                                                     textAlign: TextAlign.center,
                                                     style: style.textStyle
                                                         .copyWith(
@@ -181,7 +181,7 @@ class DetailsPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                              if (verse?.arabic?.isNotEmpty ??
+                                              if (verse.arabic?.isNotEmpty ??
                                                   false)
                                                 Padding(
                                                   padding: EdgeInsets.only(
@@ -190,7 +190,7 @@ class DetailsPage extends StatelessWidget {
                                                     bottom: dimen.padding_16,
                                                   ),
                                                   child: AutoSizeText(
-                                                    verse?.arabic ?? '',
+                                                    verse.arabic ?? '',
                                                     minFontSize:
                                                         dimen.fontSize_20,
                                                     textAlign: TextAlign.center,
@@ -204,8 +204,7 @@ class DetailsPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                              if (verse
-                                                      ?.pronounce?.isNotEmpty ??
+                                              if (verse.pronounce?.isNotEmpty ??
                                                   false)
                                                 Text(
                                                   Str.of(context)!.pronounce,
@@ -216,15 +215,14 @@ class DetailsPage extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
-                                              if (verse
-                                                      ?.pronounce?.isNotEmpty ??
+                                              if (verse.pronounce?.isNotEmpty ??
                                                   false)
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       top: dimen.padding_6,
                                                       bottom: dimen.padding_12),
                                                   child: AutoSizeText(
-                                                    verse?.pronounce ?? '',
+                                                    verse.pronounce ?? '',
                                                     textAlign: TextAlign.center,
                                                     style: style.textStyle
                                                         .copyWith(
@@ -232,7 +230,7 @@ class DetailsPage extends StatelessWidget {
                                                     ),
                                                   ),
                                                 ),
-                                              if (verse?.meaning?.isNotEmpty ??
+                                              if (verse.meaning?.isNotEmpty ??
                                                   false)
                                                 Text(
                                                   Str.of(context)!.meaning,
@@ -243,14 +241,14 @@ class DetailsPage extends StatelessWidget {
                                                     fontWeight: FontWeight.w600,
                                                   ),
                                                 ),
-                                              if (verse?.meaning?.isNotEmpty ??
+                                              if (verse.meaning?.isNotEmpty ??
                                                   false)
                                                 Padding(
                                                   padding: EdgeInsets.only(
                                                       top: dimen.padding_6,
                                                       bottom: dimen.padding_32),
                                                   child: AutoSizeText(
-                                                    verse?.meaning ?? '',
+                                                    verse.meaning ?? '',
                                                     textAlign: TextAlign.center,
                                                     style: style.textStyle
                                                         .copyWith(

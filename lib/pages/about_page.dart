@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dhikri/pages/web_page.dart';
 import 'package:dhikri/utils/constants.dart';
 import 'package:dhikri/utils/extensions.dart';
 import 'package:dhikri/values/colors.dart';
@@ -8,9 +7,7 @@ import 'package:dhikri/values/drawables.dart';
 import 'package:dhikri/values/strings.dart';
 import 'package:dhikri/values/styles.dart';
 import 'package:dhikri/widgets/appbar_widget.dart';
-import 'package:dhikri/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AboutPage extends StatelessWidget {
@@ -61,18 +58,12 @@ class AboutPage extends StatelessWidget {
                       ItemWidget(
                         icon: drawable.websiteIcon,
                         text: constant.website,
-                        onTap: () => showFullScreenDialog(
-                          context: context,
-                          child: WebPage(constant.website),
-                        ),
+                        onTap: () => extension.openUrl(constant.website),
                       ),
                       ItemWidget(
                         icon: drawable.facebookIcon,
                         text: constant.facebook,
-                        onTap: () => showFullScreenDialog(
-                          context: context,
-                          child: WebPage(constant.facebook),
-                        ),
+                        onTap: () => extension.openUrl(constant.facebook),
                       ),
                       ItemWidget(
                         icon: drawable.contactIcon,
@@ -138,7 +129,9 @@ class ItemWidget extends StatelessWidget {
                   )),
               child: SvgPicture.asset(
                 this.icon!,
-                color: color.homePrimaryColor,
+                theme: SvgTheme(
+                  currentColor: color.homePrimaryColor,
+                ),
                 height: dimen.iconSize_10,
                 width: dimen.iconSize_10,
               ),

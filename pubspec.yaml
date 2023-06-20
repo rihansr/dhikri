@@ -1,11 +1,11 @@
 name: dhikri
 description: A new Flutter application.
 
-publish_to: 'none'
+publish_to: "none"
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: ">=2.18.2 <4.0.0"
 
 dependencies:
   flutter:
@@ -15,24 +15,21 @@ dependencies:
     sdk: flutter
 
   # Media
-  cupertino_icons: ^1.0.3
   community_material_icon: ^5.9.55
-  flutter_svg: ^0.22.0
+  flutter_svg: ^2.0.7
 
   # Data Management
-  provider: ^5.0.0
-  shared_preferences: ^2.0.5
+  provider: ^6.0.5
+  shared_preferences: ^2.1.2
 
   # Browser
-  url_launcher: ^6.0.3
-  flutter_inappwebview: ^5.3.2
+  url_launcher: ^6.1.11
 
   # Other
-  toast: ^0.1.5
-  percent_indicator: ^3.0.1
-  auto_size_text: ^2.1.0
-  flutter_share : ^2.0.0
-  equatable: ^2.0.0
+  percent_indicator: ^4.2.3
+  auto_size_text: ^3.0.0
+  flutter_share: ^2.0.0
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

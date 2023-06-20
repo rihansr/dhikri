@@ -3,15 +3,12 @@ import 'package:dhikri/model/adhkar_model.dart';
 import 'package:dhikri/pages/details_page.dart';
 import 'package:dhikri/pages/home_page.dart';
 import 'package:dhikri/pages/items_page.dart';
-import 'package:dhikri/pages/web_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 
 /// Routes
 const String kHomeRoute = '/';
 const String kItemsRoute = '/itemsPage';
 const String kDetailsRoute = '/detailsPage';
-const String kWebPageRoute = '/webPage';
 
 class RouterGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -33,10 +30,6 @@ class RouterGenerator {
                   itemPos: args[1] as int,
                   item: args[2] as AdhkarItem,
                 ));
-      case kWebPageRoute:
-        return MaterialPageRoute(
-          builder: (_) => WebPage(args == null ? null : args[0] as String),
-        );
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(

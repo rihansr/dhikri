@@ -9,9 +9,8 @@ import 'package:dhikri/values/styles.dart';
 import 'package:dhikri/widgets/appbar_widget.dart';
 import 'package:dhikri/widgets/base_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 
 class ItemsPage extends StatelessWidget {
   final HomeBloc homeBloc;
@@ -26,34 +25,34 @@ class ItemsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<HomeBloc>(
-      controller: homeBloc,
-      onReady: (bloc) {
+      model: Provider.of<HomeBloc>(context),
+      onInit: (bloc) {
         bloc.adhkar = azkar;
       },
       builder: (context, bloc, child) => Container(
         decoration: BoxDecoration(
-          gradient: bloc.adhkar?.background ?? color.homeScaffoldColor,
+          gradient: bloc.adhkar.background ?? color.homeScaffoldColor,
         ),
         child: SafeArea(
           child: Scaffold(
             appBar: AppBarWidget(
               brightness: bloc.adhkar.brightness,
               title: settings.isBangla
-                  ? bloc.adhkar?.titleBn ?? ''
-                  : bloc.adhkar?.titleEn ?? '',
+                  ? bloc.adhkar.titleBn ?? ''
+                  : bloc.adhkar.titleEn ?? '',
               fontColor: bloc.adhkar.contentColor,
               leadingIcon: Icons.arrow_back,
               iconTint: bloc.adhkar.contentColor,
             ),
             body: Center(
-              child: (bloc.adhkar.itemView ?? View.list) == View.list
+              child: (bloc.adhkar.itemView ?? ItemsView.list) == ItemsView.list
                   ? ListView.separated(
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.only(
                         top: dimen.padding_12,
                         bottom: dimen.padding_24,
                       ),
-                      itemCount: bloc.adhkar?.items?.length ?? 0,
+                      itemCount: bloc.adhkar.items?.length ?? 0,
                       separatorBuilder: (_, i) {
                         return SizedBox(height: dimen.margin_24);
                       },
@@ -62,7 +61,7 @@ class ItemsPage extends StatelessWidget {
                       itemBuilder: (_, i) {
                         return ListWidget(
                           background: bloc.adhkar.itemsBackground,
-                          item: bloc.adhkar?.items![i] ?? AdhkarItem(),
+                          item: bloc.adhkar.items![i],
                           onSelect: (item) async =>
                               bloc.itemDetails(context, item).then((listen) {
                             if (listen)
@@ -83,7 +82,7 @@ class ItemsPage extends StatelessWidget {
                         dimen.padding_40,
                       ),
                       shrinkWrap: true,
-                      itemCount: bloc.adhkar?.items?.length ?? 0,
+                      itemCount: bloc.adhkar.items?.length ?? 0,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           crossAxisSpacing: dimen.margin_6,
@@ -92,7 +91,7 @@ class ItemsPage extends StatelessWidget {
                       itemBuilder: (_, i) {
                         return GridWidget(
                           background: bloc.adhkar.itemsBackground,
-                          item: bloc.adhkar?.items![i] ?? AdhkarItem(),
+                          item: bloc.adhkar.items![i],
                           onSelect: (item) async =>
                               bloc.itemDetails(context, item).then((listen) {
                             if (listen)

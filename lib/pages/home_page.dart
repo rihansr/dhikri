@@ -12,8 +12,6 @@ import 'package:dhikri/widgets/appbar_widget.dart';
 import 'package:dhikri/widgets/base_widget.dart';
 import 'package:dhikri/widgets/drawer_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/rendering.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -23,8 +21,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseWidget<HomeBloc>(
-      controller: HomeBloc(data: Provider.of(context)),
-      onReady: (bloc) {
+      model: Provider.of<HomeBloc>(context),
+      onInit: (bloc) {
         bloc.init();
       },
       builder: (context, bloc, child) => Container(
@@ -80,7 +78,7 @@ class HomePage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          Str.of(context)!.progress,
+                          'Str.of(context)!.progress',
                           textAlign: TextAlign.center,
                           style: style.titleStyle.copyWith(
                             color: Colors.black,
@@ -115,7 +113,7 @@ class HomePage extends StatelessWidget {
                           bottom: dimen.padding_12,
                         ),
                         physics: BouncingScrollPhysics(),
-                        itemCount: bloc?.adhkars?.length ?? 0,
+                        itemCount: bloc.adhkars.length,
                         separatorBuilder: (_, i) {
                           return SizedBox(height: dimen.margin_12);
                         },
@@ -123,7 +121,7 @@ class HomePage extends StatelessWidget {
                         shrinkWrap: true,
                         itemBuilder: (_, i) {
                           return AdhkarWidget(
-                            adhkar: bloc.adhkars[i] ?? Adhkar(),
+                            adhkar: bloc.adhkars[i],
                             onSelect: (azkar) =>
                                 Navigator.of(context).pushNamed(
                               kItemsRoute,
@@ -170,7 +168,7 @@ class WeekdayWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             AutoSizeText(
-              settings.isBangla ? weekDay?.dayBn ?? '' : weekDay?.dayEn ?? '',
+              settings.isBangla ? weekDay.dayBn ?? '' : weekDay.dayEn ?? '',
               minFontSize: dimen.fontSize_14,
               maxLines: 1,
               overflow: TextOverflow.fade,
@@ -262,7 +260,7 @@ class AdhkarWidget extends StatelessWidget {
                     lineHeight: dimen.viewHeight_8,
                     percent: (adhkar?.progress?.round() ?? 0) / 100,
                     padding: EdgeInsets.zero,
-                    linearStrokeCap: LinearStrokeCap.roundAll,
+                    barRadius: Radius.circular(8),
                     backgroundColor: color.homeDisabledColor,
                     progressColor: color.homeEnabledColor,
                   ),

@@ -1,10 +1,19 @@
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 final extension = Extension.function;
 
 class Extension {
   static Extension get function => Extension._();
   Extension._();
+
+  Future<void> openUrl(String? url,
+      {LaunchMode mode = LaunchMode.platformDefault}) async {
+    Uri uri = Uri.parse(url ?? '');
+    await canLaunchUrl(uri)
+        ? await launchUrl(uri, mode: mode)
+        : throw 'Could not launch $url';
+  }
 
   String digitConversion(var value) {
     if (value == null) return '';
@@ -24,8 +33,8 @@ class Extension {
 
   Future<void> launchCaller(String phone) async {
     var url = "tel:$phone";
-    if (await canLaunch(url)) {
-      await launch(url);
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
     } else {
       throw 'Could not launch $url';
     }
