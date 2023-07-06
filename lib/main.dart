@@ -1,3 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:provider/provider.dart';
 import 'package:dhikri/configs/provider_config.dart';
 import 'package:dhikri/configs/settings.dart';
 import 'package:dhikri/helper/navigation_service.dart';
@@ -5,11 +9,6 @@ import 'package:dhikri/helper/preference_manager.dart';
 import 'package:dhikri/route_generator.dart';
 import 'package:dhikri/values/colors.dart';
 import 'package:dhikri/values/drawables.dart';
-import 'package:dhikri/values/strings.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +17,12 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await preferenceManager.init();
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -54,15 +55,8 @@ class MyApp extends StatelessWidget {
                   visualDensity: VisualDensity.adaptivePlatformDensity,
                 ),
                 locale: value,
-                localizationsDelegates: [
-                  Str.delegate,
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: Str.delegate.supportedLocales,
-                localeListResolutionCallback:
-                    Str.delegate.listResolution(fallback: Locale('bn', '')),
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
                 initialRoute: kHomeRoute,
                 onGenerateRoute: RouterGenerator.generateRoute,
               );

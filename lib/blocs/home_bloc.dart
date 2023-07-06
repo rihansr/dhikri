@@ -25,6 +25,9 @@ class HomeBloc extends BaseBloc {
 
     setAdhkars();
     updateAzkarProgress();
+
+    WidgetsBinding.instance
+        .addPostFrameCallback((timeStamp) => notifyListeners());
   }
 
   /// Weekdays
@@ -33,45 +36,42 @@ class HomeBloc extends BaseBloc {
 
   void setWeekdays() {
     _weekdays = local.weekdays;
-    notifyListeners();
   }
 
   updateWeekdayProgress() {
     for (int i = 0; i < _weekdays.length; i++) {
       Weekday weekday = _weekdays[i];
 
-      bool _isWeekdayAllowed =
+      bool isWeekdayAllowed =
           dateTimeHelper.isNotFutureWeekday(weekday: weekday.id);
-      bool _dateInThisWeek = dateTimeHelper.dateInThisWeek(
+      bool dateInThisWeek = dateTimeHelper.dateInThisWeek(
           date: preferenceManager.getWeekday(key: weekday.id));
-      bool _itsToday = weekday.id == dateTimeHelper.weekday;
+      bool itsToday = weekday.id == dateTimeHelper.weekday;
 
-      _weekdays[i].status = _isWeekdayAllowed
-          ? _dateInThisWeek
+      _weekdays[i].status = isWeekdayAllowed
+          ? dateInThisWeek
               ? true
-              : _itsToday
+              : itsToday
                   ? null
                   : false
           : null;
     }
-
-    notifyListeners();
   }
 
   void setReadToday(Weekday weekday) {
     if (!dateTimeHelper.isNotFutureWeekday(weekday: weekday.id)) return;
-    bool _itsToday = weekday.id == dateTimeHelper.weekday;
+    bool itsToday = weekday.id == dateTimeHelper.weekday;
 
     for (int i = 0; i < _weekdays.length; i++) {
-      Weekday _weekday = _weekdays[i];
-      if (_weekday == weekday) {
+      Weekday weekday0 = _weekdays[i];
+      if (weekday0 == weekday) {
         bool isChecked = _weekdays[i].status ?? false;
         preferenceManager.setWeekday(
-          key: _weekday.id,
+          key: weekday0.id,
           value: isChecked ? dateTimeHelper.lastWeek : dateTimeHelper.today,
         );
         _weekdays[i].status = isChecked
-            ? _itsToday
+            ? itsToday
                 ? null
                 : false
             : true;
@@ -89,7 +89,6 @@ class HomeBloc extends BaseBloc {
   void setAdhkars() {
     _allDuas = local.allDuas;
     _adhkars = local.adhkars;
-    notifyListeners();
   }
 
   updateAzkarProgress() {
@@ -100,7 +99,6 @@ class HomeBloc extends BaseBloc {
           readToday ? preferenceManager.adhkarProgress(key: adhkar.id) : 0;
       _adhkars[adhkar.id! - 1].progress = progress;
     }
-    notifyListeners();
   }
 
   void makeProgress({required int adhkarId, required int? itemId}) {
@@ -153,9 +151,9 @@ class HomeBloc extends BaseBloc {
       makeProgress(adhkarId: azkarId, itemId: item?.id);
     }
 
-    if (item?.detailEn == null && item?.detailBn == null)
+    if (item?.detailEn == null && item?.detailBn == null) {
       return false;
-    else {
+    } else {
       return true;
     }
   }
@@ -188,39 +186,49 @@ class HomeBloc extends BaseBloc {
     var itemDetails = StringBuffer();
     if (title.isNotEmpty) itemDetails.write('\n$title\n');
 
-    if (detail.title?.isNotEmpty ?? false)
+    if (detail.title?.isNotEmpty ?? false) {
       itemDetails.write('\n${detail.title}\n');
+    }
 
-    if (detail.times?.isNotEmpty ?? false)
+    if (detail.times?.isNotEmpty ?? false) {
       itemDetails.write('\n${detail.times}\n');
+    }
 
     for (Verse verse in detail.verses ?? []) {
       var verseDetails = StringBuffer();
 
-      if (verse.title?.isNotEmpty ?? false)
+      if (verse.title?.isNotEmpty ?? false) {
         verseDetails.write('\n${verse.title}\n');
+      }
 
-      if (verse.times?.isNotEmpty ?? false)
+      if (verse.times?.isNotEmpty ?? false) {
         verseDetails.write('\n${verse.times}\n');
+      }
 
-      if (verse.arabic?.isNotEmpty ?? false)
+      if (verse.arabic?.isNotEmpty ?? false) {
         verseDetails.write('\n${verse.arabic}\n');
+      }
 
-      if (verse.pronounce?.isNotEmpty ?? false)
-        verseDetails.write('\n${Str.current!.pronounce} ${verse.pronounce}\n');
+      if (verse.pronounce?.isNotEmpty ?? false) {
+        verseDetails.write('\n${Str.of().pronounce} ${verse.pronounce}\n');
+      }
 
-      if (verse.meaning?.isNotEmpty ?? false)
-        verseDetails.write('\n${Str.current!.meaning} ${verse.meaning}\n');
+      if (verse.meaning?.isNotEmpty ?? false) {
+        verseDetails.write('\n${Str.of().meaning} ${verse.meaning}\n');
+      }
 
-      if (verseDetails.toString().isNotEmpty)
+      if (verseDetails.toString().isNotEmpty) {
         itemDetails.write('${verseDetails.toString()}\n');
+      }
     }
 
-    if (detail.source?.isNotEmpty ?? false)
+    if (detail.source?.isNotEmpty ?? false) {
       itemDetails.write('${detail.source}\n');
+    }
 
-    if (detail.explanation?.isNotEmpty ?? false)
+    if (detail.explanation?.isNotEmpty ?? false) {
       itemDetails.write('\n${detail.explanation}');
+    }
 
     return (itemDetails.toString().isNotEmpty) ? itemDetails.toString() : null;
   }
@@ -232,7 +240,7 @@ class HomeBloc extends BaseBloc {
       AdhkarItem item = _adhkar.items![prePos];
       if (item.detailEn == null && item.detailBn == null) return false;
       scrollController.jumpTo(scrollController.position.minScrollExtent);
-      this.itemPos = prePos;
+      itemPos = prePos;
       this.item = item;
       notifyListeners();
       return true;
@@ -248,9 +256,10 @@ class HomeBloc extends BaseBloc {
       AdhkarItem item = _adhkar.items![nextPos];
       if (item.detailEn == null && item.detailBn == null) return false;
       scrollController.jumpTo(scrollController.position.minScrollExtent);
-      this.itemPos = nextPos;
+      itemPos = nextPos;
       this.item = item;
       notifyListeners();
+
       return true;
     }
     return false;

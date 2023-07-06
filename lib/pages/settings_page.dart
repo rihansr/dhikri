@@ -12,13 +12,13 @@ import 'package:flutter/cupertino.dart';
 class SettingsPage extends StatelessWidget {
   final Function? callback;
 
-  SettingsPage({Key? key, this.callback}) : super(key: key);
+  const SettingsPage({Key? key, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: Str.of(context)!.drawerSettings,
+        title: Str.of(context).drawerSettings,
         fontColor: color.homeDisabledColor,
         leadingIcon: Icons.arrow_back,
         iconTint: color.homeDisabledColor,
@@ -30,8 +30,8 @@ class SettingsPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             SettingsItem(
-              title: Str.of(context)!.language,
-              subtitle: Str.of(context)!.currentLanguage,
+              title: Str.of(context).language,
+              subtitle: Str.of(context).currentLanguage,
               leading: CommunityMaterialIcons.translate,
               value: settings.currentLocale.value.languageCode == 'bn',
               callback: (value) => settings.setLocale(value),
@@ -69,26 +69,26 @@ class SettingsItem extends StatelessWidget {
       ),
       leading: IconButton(
         icon: Icon(
-          this.leading,
+          leading,
           color: Colors.white,
         ),
         onPressed: () {},
       ),
       title: AutoSizeText(
-        this.title ?? '',
+        title ?? '',
         style: style.titleStyle.copyWith(
           color: Colors.white,
         ),
       ),
       subtitle: AutoSizeText(
-        this.subtitle!,
+        subtitle!,
         style: style.titleStyle.copyWith(
           color: color.homeDisabledColor,
           fontSize: dimen.fontSize_12,
         ),
       ),
       trailing: CupertinoSwitch(
-        value: this.value,
+        value: value,
         trackColor: color.homeDisabledColor.withOpacity(.25),
         onChanged: (value) {
           if (callback != null) callback!(value);

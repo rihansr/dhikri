@@ -15,16 +15,16 @@ class DateTimeHelper {
 
   int get weekday => today.weekday;
 
-  DateTime get lastWeek => today.subtract(Duration(days: 7));
+  DateTime get lastWeek => today.subtract(const Duration(days: 7));
 
-  DateTime get nextWeek => today.add(Duration(days: 7));
+  DateTime get nextWeek => today.add(const Duration(days: 7));
 
   DateTime get firstDayOfWeek =>
       day(days: 2).subtract(Duration(days: day(days: 2).weekday + 1));
 
   DateTime get lastDayOfWeek => day(days: 2)
       .add(Duration(days: DateTime.daysPerWeek - (day(days: 2).weekday + 1)))
-      .subtract(Duration(microseconds: 1));
+      .subtract(const Duration(microseconds: 1));
 
   bool itsANewWeek({DateTime? start, DateTime? end}) {
     start = start ?? preferenceManager.getWeekday(key: firstDayOfWeekKey);
@@ -41,25 +41,27 @@ class DateTimeHelper {
 
   bool itsToday({required DateTime? date}) {
     DateTime start = today;
-    DateTime end =
-        today.add(Duration(days: 1)).subtract(Duration(microseconds: 1));
+    DateTime end = today
+        .add(const Duration(days: 1))
+        .subtract(const Duration(microseconds: 1));
     return isDateContain(start, end, date);
   }
 
   bool isDateContain(DateTime? start, DateTime? end, DateTime? date) {
-    if (start == null || end == null || date == null)
+    if (start == null || end == null || date == null) {
       return false;
-    else if (date.add(Duration(microseconds: 1)).isAfter(start) &&
-        date.isBefore(end))
+    } else if (date.add(const Duration(microseconds: 1)).isAfter(start) &&
+        date.isBefore(end)) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
   bool isNotFutureWeekday({int? weekday, DateTime? date}) {
     if (weekday == null && date == null) return false;
 
-    weekday = weekday != null ? weekday : date!.weekday;
+    weekday = weekday ?? date!.weekday;
 
     switch (this.weekday) {
       case 1:

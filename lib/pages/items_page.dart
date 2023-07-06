@@ -47,7 +47,7 @@ class ItemsPage extends StatelessWidget {
             body: Center(
               child: (bloc.adhkar.itemView ?? ItemsView.list) == ItemsView.list
                   ? ListView.separated(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       padding: EdgeInsets.only(
                         top: dimen.padding_12,
                         bottom: dimen.padding_24,
@@ -64,17 +64,18 @@ class ItemsPage extends StatelessWidget {
                           item: bloc.adhkar.items![i],
                           onSelect: (item) async =>
                               bloc.itemDetails(context, item).then((listen) {
-                            if (listen)
+                            if (listen) {
                               Navigator.of(context).pushNamed(
                                 kDetailsRoute,
                                 arguments: [bloc, i, item],
                               );
+                            }
                           }),
                         );
                       },
                     )
                   : GridView.builder(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       padding: EdgeInsets.fromLTRB(
                         dimen.padding_12,
                         dimen.padding_12,
@@ -94,11 +95,12 @@ class ItemsPage extends StatelessWidget {
                           item: bloc.adhkar.items![i],
                           onSelect: (item) async =>
                               bloc.itemDetails(context, item).then((listen) {
-                            if (listen)
+                            if (listen) {
                               Navigator.of(context).pushNamed(
                                 kDetailsRoute,
                                 arguments: [bloc.adhkar, i, item],
                               );
+                            }
                           }),
                         );
                       },
@@ -117,7 +119,7 @@ class ListWidget extends StatelessWidget {
   final AdhkarItem? item;
   final Function(AdhkarItem?)? onSelect;
 
-  ListWidget({
+  const ListWidget({
     Key? key,
     this.item,
     this.onSelect,
@@ -133,7 +135,7 @@ class ListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onSelect != null) onSelect!(this.item);
+        if (onSelect != null) onSelect!(item);
       },
       child: Container(
         margin: EdgeInsets.only(left: dimen.margin_16, right: dimen.margin_32),
@@ -144,13 +146,13 @@ class ListWidget extends StatelessWidget {
           children: [
             Icon(
               item!.read! ? Icons.check_circle : Icons.radio_button_unchecked,
-              color: this.background,
+              color: background,
             ),
             SizedBox(width: dimen.margin_4),
             Expanded(
               child: Container(
                 decoration: BoxDecoration(
-                    color: this.background ?? Colors.transparent,
+                    color: background ?? Colors.transparent,
                     borderRadius:
                         BorderRadius.all(Radius.circular(dimen.radius_48))),
                 child: Row(
@@ -199,7 +201,7 @@ class GridWidget extends StatelessWidget {
   final AdhkarItem? item;
   final Function(AdhkarItem?)? onSelect;
 
-  GridWidget({
+  const GridWidget({
     Key? key,
     this.item,
     this.onSelect,
@@ -215,13 +217,13 @@ class GridWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onSelect != null) onSelect!(this.item);
+        if (onSelect != null) onSelect!(item);
       },
       child: Container(
         padding: EdgeInsets.symmetric(
             horizontal: dimen.padding_10, vertical: dimen.padding_10),
         decoration: BoxDecoration(
-            color: this.background ?? Colors.transparent,
+            color: background ?? Colors.transparent,
             borderRadius: BorderRadius.all(Radius.circular(dimen.radius_20))),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

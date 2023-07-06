@@ -9,13 +9,13 @@ class Settings {
   Settings._();
 
   ValueNotifier<Locale> currentLocale =
-      new ValueNotifier(Locale(preferenceManager.language, ''));
+      ValueNotifier(Locale(preferenceManager.language, ''));
 
   bool get isBangla => currentLocale.value.languageCode == 'bn';
 
   void setLocale(bool isChecked) {
     preferenceManager.language = isChecked ? 'bn' : 'en';
-    currentLocale.value = new Locale(preferenceManager.language, '');
+    currentLocale.value = Locale(preferenceManager.language, '');
     // ignore: invalid_use_of_visible_for_testing_member, invalid_use_of_protected_member
     currentLocale.notifyListeners();
   }

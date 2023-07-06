@@ -13,13 +13,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 class AboutPage extends StatelessWidget {
   final Function? callback;
 
-  AboutPage({Key? key, this.callback}) : super(key: key);
+  const AboutPage({Key? key, this.callback}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
-        title: Str.of(context)!.drawerAboutUs,
+        title: Str.of(context).drawerAboutUs,
         fontColor: color.homeDisabledColor,
         leadingIcon: Icons.arrow_back,
         iconTint: color.homeDisabledColor,
@@ -45,7 +45,7 @@ class AboutPage extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(dimen.margin_12,
                             dimen.margin_16, dimen.margin_12, dimen.margin_10),
                         child: AutoSizeText(
-                          Str.current!.websiteName,
+                          Str.of(context).websiteName,
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: style.headlineTitleStyle.copyWith(
@@ -79,7 +79,7 @@ class AboutPage extends StatelessWidget {
               padding: EdgeInsets.only(
                   top: dimen.padding_12, bottom: dimen.padding_24),
               child: Text(
-                Str.of(context)!.copyright,
+                Str.of(context).copyright,
                 textAlign: TextAlign.center,
                 style: style.labelStyle.copyWith(
                   color: Colors.white,
@@ -128,16 +128,15 @@ class ItemWidget extends StatelessWidget {
                     Radius.circular(dimen.radius_16),
                   )),
               child: SvgPicture.asset(
-                this.icon!,
-                theme: SvgTheme(
-                  currentColor: color.homePrimaryColor,
-                ),
+                icon!,
+                colorFilter:
+                    ColorFilter.mode(color.homePrimaryColor, BlendMode.srcIn),
                 height: dimen.iconSize_10,
                 width: dimen.iconSize_10,
               ),
             ),
             AutoSizeText(
-              this.text ?? '',
+              text ?? '',
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: style.headlineTitleStyle.copyWith(

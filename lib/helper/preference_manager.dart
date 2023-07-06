@@ -11,9 +11,7 @@ class PreferenceManager {
   static SharedPreferences? _preferenceManager;
 
   init() async {
-    if (_preferenceManager == null) {
-      _preferenceManager = await SharedPreferences.getInstance();
-    }
+    _preferenceManager ??= await SharedPreferences.getInstance();
   }
 
   String get language => _preferenceManager?.getString(_kLanguageKey) ?? 'bn';
@@ -30,18 +28,18 @@ class PreferenceManager {
   void setReadItem({required var key, required DateTime value}) =>
       _preferenceManager!.setString('item_${key}_key', value.toIso8601String());
 
-  DateTime? getReadItem({required var key}) =>
-      (_preferenceManager?.getString('item_${key}_key') ?? null) == null
-          ? null
-          : DateTime.parse(
-              _preferenceManager?.getString('item_${key}_key') ?? '0');
+  DateTime? getReadItem({required var key}) => (_preferenceManager
+              ?.getString('item_${key}_key')) ==
+          null
+      ? null
+      : DateTime.parse(_preferenceManager?.getString('item_${key}_key') ?? '0');
 
   void setWeekday({required var key, required DateTime value}) =>
       _preferenceManager?.setString(
           'weekday_${key}_key', value.toIso8601String());
 
   DateTime? getWeekday({required var key}) =>
-      (_preferenceManager?.getString('weekday_${key}_key') ?? null) == null
+      (_preferenceManager?.getString('weekday_${key}_key')) == null
           ? null
           : DateTime.parse(
               _preferenceManager!.getString('weekday_${key}_key') ?? '0');

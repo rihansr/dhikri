@@ -29,7 +29,7 @@ class LocalData {
       titleEn: 'Morning Adhkar',
       contentColor: Colors.white,
       backdrop: drawable.morningAzkarIcon,
-      background: LinearGradient(
+      background: const LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
@@ -41,7 +41,7 @@ class LocalData {
       itemView: ItemsView.list,
       brightness: Brightness.dark,
       progress: 0,
-      weekdays: [6, 7, 1, 2, 3, 4, 5],
+      weekdays: const [6, 7, 1, 2, 3, 4, 5],
       items: _getAdhkars(id: 1),
     ),
     Adhkar(
@@ -50,7 +50,7 @@ class LocalData {
       titleEn: 'Evening Adhkar',
       contentColor: Colors.white,
       backdrop: drawable.eveningAzkarIcon,
-      background: LinearGradient(
+      background: const LinearGradient(
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
         colors: [
@@ -62,7 +62,7 @@ class LocalData {
       itemView: ItemsView.list,
       brightness: Brightness.dark,
       progress: 0,
-      weekdays: [6, 7, 1, 2, 3, 4, 5],
+      weekdays: const [6, 7, 1, 2, 3, 4, 5],
       items: _getAdhkars(id: 2),
     ),
     Adhkar(
@@ -71,7 +71,7 @@ class LocalData {
       titleEn: 'Bedtime Adhkar',
       contentColor: Colors.white,
       backdrop: drawable.sunnahBeforeSleepIcon,
-      background: LinearGradient(
+      background: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
@@ -83,7 +83,7 @@ class LocalData {
       itemView: ItemsView.list,
       brightness: Brightness.dark,
       progress: 0,
-      weekdays: [6, 7, 1, 2, 3, 4, 5],
+      weekdays: const [6, 7, 1, 2, 3, 4, 5],
       items: _getAdhkars(id: 3),
     ),
     Adhkar(
@@ -92,7 +92,7 @@ class LocalData {
       titleEn: 'Friday Adhkar',
       contentColor: Colors.black,
       backdrop: drawable.fridaySunnahIcon,
-      background: LinearGradient(
+      background: const LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
@@ -100,11 +100,11 @@ class LocalData {
           Color(0xFFEAF0F0),
         ],
       ),
-      itemsBackground: Color(0xFF1D989F),
+      itemsBackground: const Color(0xFF1D989F),
       itemView: ItemsView.list,
       brightness: Brightness.light,
       progress: 0,
-      weekdays: [5],
+      weekdays: const [5],
       items: _getAdhkars(id: 4),
     ),
   ];
@@ -114,7 +114,7 @@ class LocalData {
     titleBn: 'সকল দুআ',
     titleEn: 'All Dua',
     contentColor: Colors.white,
-    background: LinearGradient(
+    background: const LinearGradient(
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
       colors: [
@@ -125,7 +125,7 @@ class LocalData {
     itemsBackground: Colors.white30,
     itemView: ItemsView.list,
     brightness: Brightness.dark,
-    weekdays: [6, 7, 1, 2, 3, 4, 5],
+    weekdays: const [6, 7, 1, 2, 3, 4, 5],
     items: _allAdhkars(),
   );
 }
@@ -145,9 +145,10 @@ List<AdhkarItem> _getAdhkars({required id}) {
           titleEn: 'Dua #$count',
           read: isRead(item.id, item.adhkarIds!),
         ));
-      } else
+      } else {
         items.add(item
             .copyWith(azkarIds: [id], read: isRead(item.id, item.adhkarIds!)));
+      }
     }
   }
 
@@ -177,7 +178,7 @@ bool isRead(int? itemId, List<int> adhkarIds) {
 List<AdhkarItem> _adhkars = [
   AdhkarItem(
     id: 1,
-    adhkarIds: [1, 2],
+    adhkarIds: const [1, 2],
     titleBn: "আয়াতুল কুরসি",
     titleEn: "Ayatul Kursi",
     detailBn: Detail(
@@ -304,7 +305,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 2,
-    adhkarIds: [1, 2],
+    adhkarIds: const [1, 2],
     titleBn: "সবকিছুর (নিরাপত্তার) জন্য যথেষ্ট যে দুআ",
     titleEn: "Dua that will suffice one (as a protection) against everything",
     detailBn: Detail(
@@ -370,7 +371,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 3,
-    adhkarIds: [1, 2],
+    adhkarIds: const [1, 2],
     titleBn: "সায়্যিদুল ইসতিগফার\n(ক্ষমা চাওয়ার শ্রেষ্ঠ দুআ)",
     titleEn: "Sayyidinal Istighfar\n(Best way to ask forgiveness)",
     detailBn: Detail(
@@ -455,7 +456,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 4,
-    adhkarIds: [1, 2],
+    adhkarIds: const [1, 2],
     titleBn: "কোনো কিছু ক্ষতি করতে পারবে না",
     titleEn: "Not afflicted by any calamity",
     detailBn: Detail(
@@ -493,7 +494,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 5,
-    adhkarIds: [1, 2],
+    adhkarIds: const [1, 2],
     titleBn: "কিয়ামতের দিনে আল্লাহর সন্তুষ্টি",
     titleEn: "Pleasure of Allah in the day of judgment",
     detailBn: Detail(
@@ -531,7 +532,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 6,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "তার চেয়ে কেউ উৎকৃষ্ট হবে না যে এই দুআ বেশি পড়বে",
     titleEn: "Not surpassed by anyone except by one who says the dua more",
     detailBn: Detail(
@@ -563,7 +564,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 7,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "দশটি দাসমুক্তির অনুরূপ ও একশত সাওয়াব",
     titleEn: "Freeing Ten slaves, Hundred Rewards, Hundred Sins taken away",
     detailBn: Detail(
@@ -601,7 +602,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 8,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "চারটি কালেমা সারা সকাল ইবাদতের চেয়েও ওজনে ভারী",
     titleEn: "Four phrases Heavier in the Scales than all Morning of Worship",
     detailBn: Detail(
@@ -638,7 +639,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 9,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "উপকারী জ্ঞান, পবিত্র রিযিক এবং কবুলযোগ্য আমলের দো'আ",
     titleEn: "Asking for Beneficial Knowledge, Pure Rizq & Accepted Deeds",
     detailBn: Detail(
@@ -674,7 +675,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 10,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "কিয়ামতের দিন রসুলুল্লাহ (ﷺ) এর সুপারিশ লাভ",
     titleEn: "Gain Prophet saw's intercession on the Day of Judgment",
     detailBn: Detail(
@@ -708,7 +709,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 11,
-    adhkarIds: [2],
+    adhkarIds: const [2],
     titleBn: "বিষধর প্রাণীর ক্ষতি থেকে নিরাপত্তা",
     titleEn: "Protection against harmful animals",
     detailBn: Detail(
@@ -744,49 +745,49 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 12,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     icon: drawable.nightAmalOneIcon,
     titleBn: "ওযু করা",
     titleEn: "To make odhu",
   ),
   AdhkarItem(
     id: 13,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     icon: drawable.nightAmalTwoIcon,
     titleBn: "সূরা মুলক, সাজদাহ তিলাওয়াত করা",
     titleEn: "To recite Surah Mulk, Surah Sajdah",
   ),
   AdhkarItem(
     id: 14,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     icon: drawable.nightAmalThreeIcon,
     titleBn: "আয়াতুল কুরসি তিলাওয়াত করা",
     titleEn: "To recite Ayat-Ul-Kursi",
   ),
   AdhkarItem(
     id: 15,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     icon: drawable.nightAmalFourIcon,
     titleBn: "যিকর সমূহ পড়া",
     titleEn: "To do the dhikrs",
   ),
   AdhkarItem(
     id: 16,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     icon: drawable.nightAmalFiveIcon,
     titleBn: "সবাইকে ক্ষমা করে দেয়া",
     titleEn: "To forgive everyone",
   ),
   AdhkarItem(
     id: 17,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     icon: drawable.nightAmalSixIcon,
     titleBn: "ডান পাশ ফিরে ঘুমানো",
     titleEn: "To sleep on right side",
   ),
   AdhkarItem(
     id: 18,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "ঘুমাতে যাওয়ার সময় পড়ার দুআ",
     titleEn: "Dua to recite before sleeping",
     detailBn: Detail(
@@ -813,7 +814,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 19,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "খাদিম অপেক্ষা উত্তম যিকর",
     titleEn: "Dua that is better than a servant",
     detailBn: Detail(
@@ -873,7 +874,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 20,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "ঘুমন্ত অবস্থায় ভয় এবং একাকিত্বের অস্বস্তিতে পড়ার দো‘আ",
     titleEn: "Upon experiencing fear or unrest during sleep",
     detailBn: Detail(
@@ -907,7 +908,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 21,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "শেষ তিন সূরা",
     titleEn: "Last three surah",
     detailBn: Detail(
@@ -971,7 +972,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 22,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "আয়াতুল কুরসি",
     titleEn: "Ayat-Ul-Kursi",
     detailBn: Detail(
@@ -1097,7 +1098,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 23,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "সূরা বাক্বারাহ-র শেষ ২ আয়াত",
     titleEn: "Last 2 ayah of Surah Al-Baqarah",
     detailBn: Detail(
@@ -1145,7 +1146,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 24,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "ফিত্‌রাহের উপর মৃত্যুবরণ করা",
     titleEn: "Dying upon the fitrah",
     detailBn: Detail(
@@ -1181,91 +1182,91 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 25,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalOneIcon,
     titleBn: "মেসওয়াক করা",
     titleEn: "To do miswak",
   ),
   AdhkarItem(
     id: 26,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalTwoIcon,
     titleBn: "গোসল করা",
     titleEn: "To have a bath",
   ),
   AdhkarItem(
     id: 27,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalThreeIcon,
     titleBn: "পরিচ্ছন্ন কাপড় পড়া",
     titleEn: "To Wear the best clothes",
   ),
   AdhkarItem(
     id: 28,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalFourIcon,
     titleBn: "সুগন্ধি মাখা",
     titleEn: "To use perfume",
   ),
   AdhkarItem(
     id: 29,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalFiveIcon,
     titleBn: "চুল আঁচড়ানো",
     titleEn: "To comb",
   ),
   AdhkarItem(
     id: 30,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalSixIcon,
     titleBn: "ওয়াক্তের শুরুতে মসজিদে যাওয়া",
     titleEn: "To go to masjid early",
   ),
   AdhkarItem(
     id: 31,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalSevenIcon,
     titleBn: "পায়ে হেঁটে মসজিদে যাওয়া",
     titleEn: "To go to masjid by walking",
   ),
   AdhkarItem(
     id: 32,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalEightIcon,
     titleBn: "২ রাকাত তাহিয়াতুল মসজিদে পড়া",
     titleEn: "To pray 2 rakah Tahiyatul Masjid",
   ),
   AdhkarItem(
     id: 33,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalNineIcon,
     titleBn: "মন দিয়ে খুৎবা শোনা",
     titleEn: "To listen khutbah attentively",
   ),
   AdhkarItem(
     id: 34,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalTenIcon,
     titleBn: "দুআ কবুলের মুহূর্ত খোঁজা",
     titleEn: "To seek the ‘hidden’ time when prayer will be answered",
   ),
   AdhkarItem(
     id: 35,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalElevenIcon,
     titleBn: "বেশি বেশি দরূদ পড়া",
     titleEn: "To recite salutation to Prophet ﷺ in abundance",
   ),
   AdhkarItem(
     id: 36,
-    adhkarIds: [4],
+    adhkarIds: const [4],
     icon: drawable.fridayAmalTwelveIcon,
     titleBn: "সূরা কাহফ তিলাওয়াত করা",
     titleEn: "To recite Surah Al-Kahf",
   ),
   AdhkarItem(
     id: 37,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "দুআ #১",
     titleEn: "Dua #1",
     detailBn: Detail(
@@ -1299,7 +1300,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 38,
-    adhkarIds: [1, 2],
+    adhkarIds: const [1, 2],
     titleBn: "দুআ #২",
     detailBn: Detail(
       times: "তিনবার",
@@ -1334,7 +1335,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 39,
-    adhkarIds: [1, 2],
+    adhkarIds: const [1, 2],
     titleBn: "দুআ #৩",
     titleEn: "Dua #3",
     detailBn: Detail(
@@ -1368,7 +1369,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 40,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "দুআ #৪",
     titleEn: "Dua #4",
     detailBn: Detail(
@@ -1402,7 +1403,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 41,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "দুআ #৫",
     titleEn: "Dua #5",
     detailBn: Detail(
@@ -1436,7 +1437,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 42,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "দুআ #৬",
     titleEn: "Dua #6",
     detailBn: Detail(
@@ -1470,7 +1471,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 43,
-    adhkarIds: [2],
+    adhkarIds: const [2],
     titleBn: "দুআ #৭",
     titleEn: "Dua #7",
     detailBn: Detail(
@@ -1504,7 +1505,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 44,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "দুআ #৮",
     titleEn: "Dua #8",
     detailBn: Detail(
@@ -1538,7 +1539,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 45,
-    adhkarIds: [1],
+    adhkarIds: const [1],
     titleBn: "দুআ #৯",
     titleEn: "Dua #9",
     detailBn: Detail(
@@ -1570,7 +1571,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 46,
-    adhkarIds: [2],
+    adhkarIds: const [2],
     titleBn: "দুআ #১০",
     titleEn: "Dua #10",
     detailBn: Detail(
@@ -1604,7 +1605,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 47,
-    adhkarIds: [2],
+    adhkarIds: const [2],
     titleBn: "দুআ #১১",
     titleEn: "Dua #11",
     detailBn: Detail(
@@ -1638,7 +1639,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 48,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "দুআ #১২",
     titleEn: "Dua #12",
     detailBn: Detail(
@@ -1672,7 +1673,7 @@ List<AdhkarItem> _adhkars = [
   ),
   AdhkarItem(
     id: 49,
-    adhkarIds: [3],
+    adhkarIds: const [3],
     titleBn: "দুআ #১৩",
     titleEn: "Dua #13",
     detailBn: Detail(

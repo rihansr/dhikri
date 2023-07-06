@@ -18,13 +18,13 @@ import 'package:provider/provider.dart';
 class HomePage extends StatelessWidget {
   final _key = GlobalKey<ScaffoldState>();
 
+  HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BaseWidget<HomeBloc>(
       model: Provider.of<HomeBloc>(context),
-      onInit: (bloc) {
-        bloc.init();
-      },
+      onInit: (bloc) => bloc.init(),
       builder: (context, bloc, child) => Container(
         decoration: BoxDecoration(
           gradient: color.homeScaffoldColor,
@@ -32,7 +32,7 @@ class HomePage extends StatelessWidget {
         child: Scaffold(
           key: _key,
           appBar: AppBarWidget(
-            title: Str.of(context)!.appName,
+            title: Str.of(context).appName,
             fontSize: dimen.fontSize_36,
             fontWeight: FontWeight.w900,
             fontColor: color.homeDisabledColor,
@@ -47,93 +47,89 @@ class HomePage extends StatelessWidget {
           ),
           drawerScrimColor: Colors.transparent,
           body: SafeArea(
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                mainAxisAlignment: MainAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    margin: EdgeInsets.fromLTRB(
-                      dimen.margin_12,
-                      dimen.margin_12,
-                      dimen.margin_12,
-                      0.0,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: dimen.padding_12,
-                      vertical: dimen.padding_6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: color.homeDisabledColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(0.0),
-                        topRight: Radius.circular(dimen.radius_12),
-                        bottomLeft: Radius.circular(dimen.radius_24),
-                        bottomRight: Radius.circular(dimen.radius_12),
-                      ),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Str.of(context)!.progress',
-                          textAlign: TextAlign.center,
-                          style: style.titleStyle.copyWith(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w600,
-                            fontSize: dimen.fontSize_20,
-                          ),
-                        ),
-                        SizedBox(height: dimen.margin_8),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            for (Weekday day in bloc.weekdays)
-                              WeekdayWidget(
-                                weekDay: day,
-                                onCheck: (weekday) =>
-                                    bloc.setReadToday(weekday),
-                              ),
-                          ],
-                        )
-                      ],
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(
+                    dimen.margin_12,
+                    dimen.margin_12,
+                    dimen.margin_12,
+                    0.0,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: dimen.padding_12,
+                    vertical: dimen.padding_6,
+                  ),
+                  decoration: BoxDecoration(
+                    color: color.homeDisabledColor,
+                    borderRadius: BorderRadius.only(
+                      topLeft: const Radius.circular(0.0),
+                      topRight: Radius.circular(dimen.radius_12),
+                      bottomLeft: Radius.circular(dimen.radius_24),
+                      bottomRight: Radius.circular(dimen.radius_12),
                     ),
                   ),
-                  SizedBox(height: dimen.margin_2),
-                  Expanded(
-                    flex: 1,
-                    child: Center(
-                      child: ListView.separated(
-                        padding: EdgeInsets.only(
-                          top: dimen.padding_12,
-                          bottom: dimen.padding_12,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        Str.of(context).appName,
+                        textAlign: TextAlign.center,
+                        style: style.titleStyle.copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: dimen.fontSize_20,
                         ),
-                        physics: BouncingScrollPhysics(),
-                        itemCount: bloc.adhkars.length,
-                        separatorBuilder: (_, i) {
-                          return SizedBox(height: dimen.margin_12);
-                        },
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        itemBuilder: (_, i) {
-                          return AdhkarWidget(
-                            adhkar: bloc.adhkars[i],
-                            onSelect: (azkar) =>
-                                Navigator.of(context).pushNamed(
-                              kItemsRoute,
-                              arguments: [bloc, azkar],
-                            ),
-                          );
-                        },
                       ),
+                      SizedBox(height: dimen.margin_8),
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          for (Weekday day in bloc.weekdays)
+                            WeekdayWidget(
+                              weekDay: day,
+                              onCheck: (weekday) => bloc.setReadToday(weekday),
+                            ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(height: dimen.margin_2),
+                Expanded(
+                  flex: 1,
+                  child: Center(
+                    child: ListView.separated(
+                      padding: EdgeInsets.only(
+                        top: dimen.padding_12,
+                        bottom: dimen.padding_12,
+                      ),
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: bloc.adhkars.length,
+                      separatorBuilder: (_, i) {
+                        return SizedBox(height: dimen.margin_12);
+                      },
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemBuilder: (_, i) {
+                        return AdhkarWidget(
+                          adhkar: bloc.adhkars[i],
+                          onSelect: (azkar) => Navigator.of(context).pushNamed(
+                            kItemsRoute,
+                            arguments: [bloc, azkar],
+                          ),
+                        );
+                      },
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
           ),
         ),
@@ -154,9 +150,11 @@ class WeekdayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
       onTap: () {
-        if (onCheck != null) onCheck!(this.weekDay);
+        if (onCheck != null) onCheck!(weekDay);
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 9,
@@ -187,6 +185,8 @@ class WeekdayWidget extends StatelessWidget {
                 borderRadius:
                     BorderRadius.all(Radius.circular(dimen.radius_16)),
               ),
+              margin: EdgeInsets.only(top: dimen.margin_6),
+              padding: EdgeInsets.all(dimen.padding_2),
               child: weekDay.status == null
                   ? SizedBox(
                       height: dimen.iconSize_14,
@@ -197,8 +197,6 @@ class WeekdayWidget extends StatelessWidget {
                       color: color.homeDisabledColor,
                       size: dimen.iconSize_14,
                     ),
-              margin: EdgeInsets.only(top: dimen.margin_6),
-              padding: EdgeInsets.all(dimen.padding_2),
             )
           ],
         ),
@@ -221,7 +219,7 @@ class AdhkarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (onSelect != null) onSelect!(this.adhkar);
+        if (onSelect != null) onSelect!(adhkar);
       },
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: dimen.margin_24),
@@ -260,7 +258,7 @@ class AdhkarWidget extends StatelessWidget {
                     lineHeight: dimen.viewHeight_8,
                     percent: (adhkar?.progress?.round() ?? 0) / 100,
                     padding: EdgeInsets.zero,
-                    barRadius: Radius.circular(8),
+                    barRadius: const Radius.circular(8),
                     backgroundColor: color.homeDisabledColor,
                     progressColor: color.homeEnabledColor,
                   ),

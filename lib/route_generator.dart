@@ -34,7 +34,7 @@ class RouterGenerator {
         return MaterialPageRoute(
           builder: (_) => Scaffold(
             appBar: AppBar(
-              title: Text("Invalid Route!!"),
+              title: const Text("Invalid Route!!"),
             ),
             body: Center(
               child: Text('No route defined for ${settings.name}'),

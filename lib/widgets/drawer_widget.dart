@@ -34,7 +34,7 @@ class DrawerWidget extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             color: Colors.black45,
-            offset: Offset(1.0, 0.0), //(x,y)
+            offset: const Offset(1.0, 0.0), //(x,y)
             blurRadius: dimen.radius_16,
           ),
         ],
@@ -53,7 +53,7 @@ class DrawerWidget extends StatelessWidget {
                 children: [
                   DrawerItem(
                     icon: drawable.drawerDuaIcon,
-                    label: Str.of(context)!.drawerAllDuas,
+                    label: Str.of(context).drawerAllDuas,
                     contentColor: contentColor,
                     onTap: () => Navigator.of(context).pushNamed(
                       kItemsRoute,
@@ -62,34 +62,34 @@ class DrawerWidget extends StatelessWidget {
                   ),
                   DrawerItem(
                     icon: drawable.drawerMasalaIcon,
-                    label: Str.of(context)!.drawerMasala,
+                    label: Str.of(context).drawerMasala,
                     contentColor: contentColor,
                     onTap: () => showFullScreenDialog(
                       context: context,
-                      child: MasalaPage(),
+                      child: const MasalaPage(),
                     ),
                   ),
                   DrawerItem(
                     icon: drawable.drawerSettingsIcon,
-                    label: Str.of(context)!.drawerSettings,
+                    label: Str.of(context).drawerSettings,
                     contentColor: contentColor,
                     onTap: () => showFullScreenDialog(
                       context: context,
-                      child: SettingsPage(),
+                      child: const SettingsPage(),
                     ),
                   ),
                   DrawerItem(
                     icon: drawable.drawerAboutUsIcon,
-                    label: Str.of(context)!.drawerAboutUs,
+                    label: Str.of(context).drawerAboutUs,
                     contentColor: contentColor,
                     onTap: () => showFullScreenDialog(
                       context: context,
-                      child: AboutPage(),
+                      child: const AboutPage(),
                     ),
                   ),
                   DrawerItem(
                     icon: drawable.drawerExitIcon,
-                    label: Str.of(context)!.drawerExit,
+                    label: Str.of(context).drawerExit,
                     contentColor: contentColor,
                     onTap: () =>
                         Platform.isAndroid ? SystemNavigator.pop() : exit(0),
@@ -99,7 +99,7 @@ class DrawerWidget extends StatelessWidget {
             ),
             SizedBox(height: dimen.margin_16),
             Text(
-              Str.of(context)!.copyright,
+              Str.of(context).copyright,
               textAlign: TextAlign.start,
               style: style.labelStyle.copyWith(
                 color: contentColor,
@@ -143,7 +143,9 @@ class DrawerItem extends StatelessWidget {
           children: [
             Center(
               child: SvgPicture.asset(
-                this.icon,
+                icon,
+                colorFilter: ColorFilter.mode(
+                    contentColor ?? Colors.white, BlendMode.srcIn),
                 theme: SvgTheme(
                   currentColor: contentColor ?? Colors.white,
                 ),
@@ -155,7 +157,7 @@ class DrawerItem extends StatelessWidget {
             Expanded(
               flex: 1,
               child: Text(
-                this.label,
+                label,
                 style: style.labelStyle.copyWith(
                     color: contentColor ?? Colors.white,
                     fontSize: dimen.fontSize_15,

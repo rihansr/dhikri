@@ -43,7 +43,7 @@ class DetailsPage extends StatelessWidget {
           ),
           body: Padding(
             padding: EdgeInsets.fromLTRB(
-                dimen.padding_16, 0, dimen.padding_16, dimen.padding_16),
+                dimen.padding_16, 0, dimen.padding_16, dimen.padding_8),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -84,7 +84,7 @@ class DetailsPage extends StatelessWidget {
                     child: SingleChildScrollView(
                       controller: bloc.scrollController,
                       scrollDirection: Axis.vertical,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -207,7 +207,7 @@ class DetailsPage extends StatelessWidget {
                                               if (verse.pronounce?.isNotEmpty ??
                                                   false)
                                                 Text(
-                                                  Str.of(context)!.pronounce,
+                                                  Str.of(context).pronounce,
                                                   textAlign: TextAlign.center,
                                                   style:
                                                       style.labelStyle.copyWith(
@@ -233,7 +233,7 @@ class DetailsPage extends StatelessWidget {
                                               if (verse.meaning?.isNotEmpty ??
                                                   false)
                                                 Text(
-                                                  Str.of(context)!.meaning,
+                                                  Str.of(context).meaning,
                                                   textAlign: TextAlign.center,
                                                   style:
                                                       style.labelStyle.copyWith(
@@ -294,37 +294,37 @@ class DetailsPage extends StatelessWidget {
                                 ),
                               ),
                             ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButtonWidget(
-                                icon: Icons.share,
-                                onPressed: () async => bloc.share(),
-                              ),
-                              IconButtonWidget(
-                                icon: Icons.arrow_back_ios_rounded,
-                                onPressed: () => bloc.previous().then((listen) {
-                                  if (listen) {
-                                    bloc.itemDetails(context, bloc.item!);
-                                  }
-                                }),
-                              ),
-                              IconButtonWidget(
-                                icon: Icons.arrow_forward_ios_rounded,
-                                onPressed: () => bloc.next().then((listen) {
-                                  if (listen) {
-                                    bloc.itemDetails(context, bloc.item!);
-                                  }
-                                }),
-                              ),
-                            ],
-                          )
                         ],
                       ),
                     ),
                   ),
-                )
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButtonWidget(
+                      icon: Icons.share,
+                      onPressed: () async => bloc.share(),
+                    ),
+                    IconButtonWidget(
+                      icon: Icons.arrow_back_ios_rounded,
+                      onPressed: () => bloc.previous().then((listen) {
+                        if (listen) {
+                          bloc.itemDetails(context, bloc.item!);
+                        }
+                      }),
+                    ),
+                    IconButtonWidget(
+                      icon: Icons.arrow_forward_ios_rounded,
+                      onPressed: () => bloc.next().then((listen) {
+                        if (listen) {
+                          bloc.itemDetails(context, bloc.item!);
+                        }
+                      }),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -354,10 +354,10 @@ class IconButtonWidget extends StatelessWidget {
         dimen.padding_8,
       ),
       icon: Icon(
-        this.icon,
+        icon,
         color: Colors.white70,
       ),
-      onPressed: this.onPressed as void Function()?,
+      onPressed: onPressed as void Function()?,
     );
   }
 }

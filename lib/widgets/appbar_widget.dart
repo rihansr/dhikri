@@ -23,6 +23,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Function? onTapTrailing;
 
   const AppBarWidget({
+    super.key,
     this.title,
     this.centerTitle = true,
     this.background,
@@ -40,53 +41,54 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     this.elevation = 0,
     this.onTapLeading,
     this.onTapTrailing,
-  }) : super();
+  });
 
   @override
-  Size get preferredSize => Size.fromHeight(58);
+  Size get preferredSize => const Size.fromHeight(58);
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      centerTitle: this.centerTitle,
+      centerTitle: centerTitle,
       title: AutoSizeText(
-        this.title ?? '',
-        minFontSize: (this.fontSize ?? dimen.fontSize_22) - 2,
+        title ?? '',
+        minFontSize: (fontSize ?? dimen.fontSize_22) - 2,
         overflow: TextOverflow.ellipsis,
-        style: this.fontStyle ??
+        style: fontStyle ??
             style.headlineTitleStyle.copyWith(
-              fontSize: this.fontSize ?? dimen.fontSize_22,
-              fontWeight: this.fontWeight ?? FontWeight.w700,
-              color: this.fontColor ?? Colors.white,
+              fontSize: fontSize ?? dimen.fontSize_22,
+              fontWeight: fontWeight ?? FontWeight.w700,
+              color: fontColor ?? Colors.white,
             ),
       ),
-      leading: this.leadingIcon != null || this.leadingWidget != null
+      leading: leadingIcon != null || leadingWidget != null
           ? InkWell(
               onTap: () {
-                if (this.onTapLeading == null)
+                if (onTapLeading == null) {
                   Navigator.pop(context);
-                else
-                  this.onTapLeading!();
+                } else {
+                  onTapLeading!();
+                }
               },
-              child: this.leadingWidget ??
+              child: leadingWidget ??
                   Icon(
-                    this.leadingIcon,
-                    size: this.iconSize ?? dimen.iconSize_24,
-                    color: this.iconTint ?? Colors.white,
+                    leadingIcon,
+                    size: iconSize ?? dimen.iconSize_24,
+                    color: iconTint ?? Colors.white,
                   ),
             )
           : Container(),
-      backgroundColor: this.background ?? Colors.transparent,
-      elevation: this.elevation,
+      backgroundColor: background ?? Colors.transparent,
+      elevation: elevation,
       actions: [
-        this.trailingIcon != null || this.trailingWidget != null
+        trailingIcon != null || trailingWidget != null
             ? InkWell(
-                onTap: this.onTapTrailing as void Function()?,
-                child: this.trailingWidget ??
+                onTap: onTapTrailing as void Function()?,
+                child: trailingWidget ??
                     Icon(
-                      this.trailingIcon,
-                      size: this.iconSize ?? dimen.iconSize_24,
-                      color: this.iconTint ?? Colors.white,
+                      trailingIcon,
+                      size: iconSize ?? dimen.iconSize_24,
+                      color: iconTint ?? Colors.white,
                     ),
               )
             : Container(),

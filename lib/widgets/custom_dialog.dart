@@ -60,7 +60,8 @@ class CustomDialog extends StatelessWidget {
       color: Colors.white,
       child: Container(
         width: width ?? MediaQuery.of(context).size.width / 1.15,
-        padding: padding ?? EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        padding:
+            padding ?? const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -69,12 +70,12 @@ class CustomDialog extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: Padding(
-                padding: EdgeInsets.only(bottom: 8.0),
+                padding: const EdgeInsets.only(bottom: 8.0),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).pop();
                   },
-                  child: Icon(
+                  child: const Icon(
                     Icons.clear,
                     color: Color(0xFF888888),
                   ),
@@ -83,7 +84,7 @@ class CustomDialog extends StatelessWidget {
             ),
             if (title?.isNotEmpty ?? false)
               Padding(
-                padding: EdgeInsets.only(bottom: 12.0),
+                padding: const EdgeInsets.only(bottom: 12.0),
                 child: AutoSizeText(
                   title!,
                   textAlign: titleAlign ?? TextAlign.center,
@@ -99,7 +100,7 @@ class CustomDialog extends StatelessWidget {
               ),
             if (subtitle?.isNotEmpty ?? false)
               Padding(
-                padding: EdgeInsets.only(bottom: 16.0),
+                padding: const EdgeInsets.only(bottom: 16.0),
                 child: AutoSizeText(
                   subtitle!,
                   minFontSize: subtitleFontSize - 1,
@@ -115,7 +116,7 @@ class CustomDialog extends StatelessWidget {
               ),
             if (buttonDirection == Axis.horizontal)
               Padding(
-                padding: EdgeInsets.only(top: 12.0),
+                padding: const EdgeInsets.only(top: 12.0),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -138,7 +139,7 @@ class CustomDialog extends StatelessWidget {
               ),
             if (buttonDirection == Axis.vertical)
               Padding(
-                padding: EdgeInsets.only(top: 12.0),
+                padding: const EdgeInsets.only(top: 12.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -198,13 +199,14 @@ showFullScreenDialog({
     barrierColor: Colors.transparent,
     context: context,
     builder: (BuildContext context) {
-      if (isLightTheme)
-        SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      if (isLightTheme) {
+        SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           systemNavigationBarColor: Colors.transparent,
           systemNavigationBarDividerColor: Colors.transparent,
           systemNavigationBarIconBrightness: Brightness.dark,
         ));
+      }
       return StatefulBuilder(
         builder: (context, setState) {
           return WillPopScope(
@@ -224,13 +226,14 @@ showFullScreenDialog({
       );
     },
   ).then((val) {
-    if (isLightTheme)
-      SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    if (isLightTheme) {
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.transparent,
         systemNavigationBarDividerColor: Colors.transparent,
         systemNavigationBarIconBrightness: Brightness.light,
       ));
+    }
   });
 }
 
@@ -248,7 +251,7 @@ Future<void> showDialogBox(
                 return Future(() => false);
               },
               child: Center(
-                child: child == null ? Container() : child,
+                child: child ?? Container(),
               ),
             )),
       );

@@ -69,18 +69,16 @@ class Adhkar extends Equatable {
       );
 
   factory Adhkar.fromJson(Map<String, dynamic> json) => Adhkar(
-        id: json["id"] == null ? null : json["id"],
-        titleBn: json["title_bn"] == null ? null : json["title_bn"],
-        titleEn: json["title_en"] == null ? null : json["title_en"],
-        contentColor:
-            json["content_color"] == null ? null : json["content_color"],
-        backdrop: json["backdrop"] == null ? null : json["backdrop"],
-        background: json["background"] == null ? null : json["background"],
-        itemsBackground:
-            json["items_background"] == null ? null : json["items_background"],
-        itemView: json["item_view"] == null ? null : json["item_view"],
-        progress: json["progress"] == null ? null : json["progress"],
-        brightness: json["brightness"] == null ? null : json["brightness"],
+        id: json["id"],
+        titleBn: json["title_bn"],
+        titleEn: json["title_en"],
+        contentColor: json["content_color"],
+        backdrop: json["backdrop"],
+        background: json["background"],
+        itemsBackground: json["items_background"],
+        itemView: json["item_view"],
+        progress: json["progress"],
+        brightness: json["brightness"],
         weekdays: json["weekdays"] == null
             ? null
             : List<int>.from(json["weekdays"].map((x) => x)),
@@ -91,16 +89,16 @@ class Adhkar extends Equatable {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "title_bn": titleBn == null ? null : titleBn,
-        "title_en": titleEn == null ? null : titleEn,
-        "content_color": contentColor == null ? null : contentColor,
-        "backdrop": backdrop == null ? null : backdrop,
-        "background": background == null ? null : background,
-        "items_background": itemsBackground == null ? null : itemsBackground,
-        "item_view": itemView == null ? null : itemView,
-        "progress": progress == null ? null : progress,
-        "brightness": brightness == null ? null : brightness,
+        "id": id,
+        "title_bn": titleBn,
+        "title_en": titleEn,
+        "content_color": contentColor,
+        "backdrop": backdrop,
+        "background": background,
+        "items_background": itemsBackground,
+        "item_view": itemView,
+        "progress": progress,
+        "brightness": brightness,
         "weekdays": weekdays == null
             ? null
             : List<dynamic>.from(weekdays!.map((x) => x)),
@@ -147,7 +145,7 @@ class AdhkarItem extends Equatable {
   }) =>
       AdhkarItem(
         id: id ?? this.id,
-        adhkarIds: azkarIds ?? this.adhkarIds,
+        adhkarIds: azkarIds ?? adhkarIds,
         icon: icon ?? this.icon,
         titleBn: titleBn ?? this.titleBn,
         titleEn: titleEn ?? this.titleEn,
@@ -157,33 +155,33 @@ class AdhkarItem extends Equatable {
       );
 
   factory AdhkarItem.fromJson(Map<String, dynamic> json) => AdhkarItem(
-        id: json["id"] == null ? null : json["id"],
+        id: json["id"],
         adhkarIds: json["adhkar_ids"] == null
             ? null
             : List<int>.from(json["adhkar_ids"].map((x) => x)),
-        icon: json["icon"] == null ? null : json["icon"],
-        titleBn: json["title_bn"] == null ? null : json["title_bn"],
-        titleEn: json["title_en"] == null ? null : json["title_en"],
+        icon: json["icon"],
+        titleBn: json["title_bn"],
+        titleEn: json["title_en"],
         detailBn: json["detail_bn"] == null
             ? null
             : Detail.fromJson(json["detail_bn"]),
         detailEn: json["detail_en"] == null
             ? null
             : Detail.fromJson(json["detail_en"]),
-        read: json["read"] == null ? null : json["read"],
+        read: json["read"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
+        "id": id,
         "adhkar_ids": adhkarIds == null
             ? null
             : List<dynamic>.from(adhkarIds!.map((x) => x)),
-        "icon": icon == null ? null : icon,
-        "title_bn": titleBn == null ? null : titleBn,
-        "title_en": titleEn == null ? null : titleEn,
+        "icon": icon,
+        "title_bn": titleBn,
+        "title_en": titleEn,
         "detail_bn": detailBn == null ? null : detailBn!.toJson(),
         "detail_en": detailEn == null ? null : detailEn!.toJson(),
-        "read": read == null ? null : read,
+        "read": read,
       };
 
   @override
@@ -221,23 +219,23 @@ class Detail {
       );
 
   factory Detail.fromJson(Map<String, dynamic> json) => Detail(
-        title: json["title"] == null ? null : json["title"],
-        times: json["times"] == null ? null : json["times"],
+        title: json["title"],
+        times: json["times"],
         verses: json["verses"] == null
             ? null
             : List<Verse>.from(json["verses"].map((x) => Verse.fromJson(x))),
-        source: json["source"] == null ? null : json["source"],
-        explanation: json["explanation"] == null ? null : json["explanation"],
+        source: json["source"],
+        explanation: json["explanation"],
       );
 
   Map<String, dynamic> toJson() => {
-        "title": title == null ? null : title,
-        "times": times == null ? null : times,
+        "title": title,
+        "times": times,
         "verses": verses == null
             ? null
             : List<dynamic>.from(verses!.map((x) => x.toJson())),
-        "source": source == null ? null : source,
-        "explanation": explanation == null ? null : explanation,
+        "source": source,
+        "explanation": explanation,
       };
 }
 
@@ -276,20 +274,20 @@ class Verse {
       );
 
   factory Verse.fromJson(Map<String, dynamic> json) => Verse(
-        id: json["id"] == null ? null : json["id"],
-        title: json["title"] == null ? null : json["title"],
-        times: json["times"] == null ? null : json["times"],
-        arabic: json["arabic"] == null ? null : json["arabic"],
-        pronounce: json["pronounce"] == null ? null : json["pronounce"],
-        meaning: json["meaning"] == null ? null : json["meaning"],
+        id: json["id"],
+        title: json["title"],
+        times: json["times"],
+        arabic: json["arabic"],
+        pronounce: json["pronounce"],
+        meaning: json["meaning"],
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id == null ? null : id,
-        "title": title == null ? null : title,
-        "times": times == null ? null : times,
-        "arabic": arabic == null ? null : arabic,
-        "pronounce": pronounce == null ? null : pronounce,
-        "meaning": meaning == null ? null : meaning,
+        "id": id,
+        "title": title,
+        "times": times,
+        "arabic": arabic,
+        "pronounce": pronounce,
+        "meaning": meaning,
       };
 }
