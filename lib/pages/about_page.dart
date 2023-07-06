@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dhikri/utils/constants.dart';
 import 'package:dhikri/utils/extensions.dart';
 import 'package:dhikri/values/colors.dart';
-import 'package:dhikri/values/dimens.dart';
 import 'package:dhikri/values/drawables.dart';
 import 'package:dhikri/values/strings.dart';
 import 'package:dhikri/values/styles.dart';
@@ -11,18 +10,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class AboutPage extends StatelessWidget {
-  final Function? callback;
-
-  const AboutPage({Key? key, this.callback}) : super(key: key);
+  const AboutPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
         title: Str.of(context).drawerAboutUs,
-        fontColor: color.homeDisabledColor,
+        fontColor: color.disable,
         leadingIcon: Icons.arrow_back,
-        iconTint: color.homeDisabledColor,
+        iconTint: color.disable,
       ),
       body: SafeArea(
         child: Column(
@@ -38,18 +35,17 @@ class AboutPage extends StatelessWidget {
                     children: [
                       Image.asset(
                         drawable.tgsLogo,
-                        height: dimen.iconSize_128,
-                        width: dimen.iconSize_128,
+                        height: 128,
+                        width: 128,
                       ),
                       Padding(
-                        padding: EdgeInsets.fromLTRB(dimen.margin_12,
-                            dimen.margin_16, dimen.margin_12, dimen.margin_10),
+                        padding: const EdgeInsets.fromLTRB(12, 16, 12, 10),
                         child: AutoSizeText(
                           Str.of(context).websiteName,
                           textAlign: TextAlign.center,
                           maxLines: 2,
                           style: style.headlineTitleStyle.copyWith(
-                            fontSize: dimen.fontSize_20,
+                            fontSize: 20,
                             fontWeight: FontWeight.w700,
                             color: Colors.white,
                           ),
@@ -76,14 +72,13 @@ class AboutPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: dimen.padding_12, bottom: dimen.padding_24),
+              padding: const EdgeInsets.only(top: 12, bottom: 24),
               child: Text(
                 Str.of(context).copyright,
                 textAlign: TextAlign.center,
                 style: style.labelStyle.copyWith(
                   color: Colors.white,
-                  fontSize: dimen.fontSize_13,
+                  fontSize: 13,
                   fontWeight: FontWeight.w300,
                 ),
               ),
@@ -98,7 +93,7 @@ class AboutPage extends StatelessWidget {
 class ItemWidget extends StatelessWidget {
   final String? icon;
   final String? text;
-  final Function? onTap;
+  final Function()? onTap;
 
   const ItemWidget({
     Key? key,
@@ -109,30 +104,30 @@ class ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap as void Function()?,
+    return InkWell(
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: onTap,
       child: Container(
-        margin: EdgeInsets.symmetric(
-            vertical: dimen.margin_6, horizontal: dimen.margin_12),
+        margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 12),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              margin: EdgeInsets.only(right: dimen.margin_8),
-              padding: EdgeInsets.all(dimen.padding_4),
+              margin: const EdgeInsets.only(right: 8),
+              padding: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                  color: color.homeDisabledColor.withOpacity(.75),
-                  borderRadius: BorderRadius.all(
-                    Radius.circular(dimen.radius_16),
-                  )),
+                color: color.disable.withOpacity(.75),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
+              ),
               child: SvgPicture.asset(
                 icon!,
-                colorFilter:
-                    ColorFilter.mode(color.homePrimaryColor, BlendMode.srcIn),
-                height: dimen.iconSize_10,
-                width: dimen.iconSize_10,
+                colorFilter: ColorFilter.mode(color.primary, BlendMode.srcIn),
+                height: 10,
+                width: 10,
               ),
             ),
             AutoSizeText(
@@ -140,9 +135,9 @@ class ItemWidget extends StatelessWidget {
               textAlign: TextAlign.center,
               overflow: TextOverflow.ellipsis,
               style: style.headlineTitleStyle.copyWith(
-                fontSize: dimen.fontSize_13,
+                fontSize: 13,
                 fontWeight: FontWeight.w400,
-                color: color.homeDisabledColor,
+                color: color.disable,
               ),
             )
           ],

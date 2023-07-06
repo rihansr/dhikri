@@ -20,11 +20,11 @@ class HomeBloc extends BaseBloc {
           key: lastDayOfWeekKey, value: dateTimeHelper.lastDayOfWeek);
     }
 
-    setWeekdays();
-    updateWeekdayProgress();
-
-    setAdhkars();
-    updateAzkarProgress();
+    this
+      ..setWeekdays()
+      ..updateWeekdayProgress()
+      ..setAdhkars()
+      ..updateAzkarProgress();
 
     WidgetsBinding.instance
         .addPostFrameCallback((timeStamp) => notifyListeners());
@@ -34,9 +34,7 @@ class HomeBloc extends BaseBloc {
   List<Weekday> _weekdays = [];
   UnmodifiableListView<Weekday> get weekdays => UnmodifiableListView(_weekdays);
 
-  void setWeekdays() {
-    _weekdays = local.weekdays;
-  }
+  void setWeekdays() => _weekdays = local.weekdays;
 
   updateWeekdayProgress() {
     for (int i = 0; i < _weekdays.length; i++) {
@@ -63,11 +61,11 @@ class HomeBloc extends BaseBloc {
     bool itsToday = weekday.id == dateTimeHelper.weekday;
 
     for (int i = 0; i < _weekdays.length; i++) {
-      Weekday weekday0 = _weekdays[i];
-      if (weekday0 == weekday) {
+      Weekday wday = _weekdays[i];
+      if (wday == weekday) {
         bool isChecked = _weekdays[i].status ?? false;
         preferenceManager.setWeekday(
-          key: weekday0.id,
+          key: wday.id,
           value: isChecked ? dateTimeHelper.lastWeek : dateTimeHelper.today,
         );
         _weekdays[i].status = isChecked
@@ -86,10 +84,9 @@ class HomeBloc extends BaseBloc {
   List<Adhkar> _adhkars = [];
   UnmodifiableListView<Adhkar> get adhkars => UnmodifiableListView(_adhkars);
 
-  void setAdhkars() {
-    _allDuas = local.allDuas;
-    _adhkars = local.adhkars;
-  }
+  void setAdhkars() => this
+    .._allDuas = local.allDuas
+    .._adhkars = local.adhkars;
 
   updateAzkarProgress() {
     for (Adhkar adhkar in _adhkars) {
@@ -151,11 +148,7 @@ class HomeBloc extends BaseBloc {
       makeProgress(adhkarId: azkarId, itemId: item?.id);
     }
 
-    if (item?.detailEn == null && item?.detailBn == null) {
-      return false;
-    } else {
-      return true;
-    }
+    return item?.detailEn != null || item?.detailBn != null;
   }
 
   /// Item Details

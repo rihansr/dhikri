@@ -2,7 +2,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:community_material_icon/community_material_icon.dart';
 import 'package:dhikri/configs/settings.dart';
 import 'package:dhikri/values/colors.dart';
-import 'package:dhikri/values/dimens.dart';
 import 'package:dhikri/values/strings.dart';
 import 'package:dhikri/values/styles.dart';
 import 'package:dhikri/widgets/appbar_widget.dart';
@@ -10,18 +9,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class SettingsPage extends StatelessWidget {
-  final Function? callback;
-
-  const SettingsPage({Key? key, this.callback}) : super(key: key);
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarWidget(
         title: Str.of(context).drawerSettings,
-        fontColor: color.homeDisabledColor,
+        fontColor: color.disable,
         leadingIcon: Icons.arrow_back,
-        iconTint: color.homeDisabledColor,
+        iconTint: color.disable,
       ),
       body: SafeArea(
         child: Column(
@@ -63,10 +60,7 @@ class SettingsItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       dense: true,
-      contentPadding: EdgeInsets.only(
-        left: dimen.padding_8,
-        right: dimen.padding_12,
-      ),
+      contentPadding: const EdgeInsets.only(left: 8, right: 12),
       leading: IconButton(
         icon: Icon(
           leading,
@@ -83,13 +77,13 @@ class SettingsItem extends StatelessWidget {
       subtitle: AutoSizeText(
         subtitle!,
         style: style.titleStyle.copyWith(
-          color: color.homeDisabledColor,
-          fontSize: dimen.fontSize_12,
+          color: color.disable,
+          fontSize: 12,
         ),
       ),
       trailing: CupertinoSwitch(
         value: value,
-        trackColor: color.homeDisabledColor.withOpacity(.25),
+        trackColor: color.disable.withOpacity(.25),
         onChanged: (value) {
           if (callback != null) callback!(value);
         },

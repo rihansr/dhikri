@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:dhikri/values/dimens.dart';
 import 'package:dhikri/values/styles.dart';
 import 'package:flutter/material.dart';
 
@@ -19,8 +18,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final Color? iconTint;
   final double? iconSize;
   final double? elevation;
-  final Function? onTapLeading;
-  final Function? onTapTrailing;
+  final Function()? onTapLeading;
+  final Function()? onTapTrailing;
 
   const AppBarWidget({
     super.key,
@@ -52,28 +51,27 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle,
       title: AutoSizeText(
         title ?? '',
-        minFontSize: (fontSize ?? dimen.fontSize_22) - 2,
+        minFontSize: (fontSize ?? 22) - 2,
         overflow: TextOverflow.ellipsis,
         style: fontStyle ??
             style.headlineTitleStyle.copyWith(
-              fontSize: fontSize ?? dimen.fontSize_22,
+              fontSize: fontSize ?? 22,
               fontWeight: fontWeight ?? FontWeight.w700,
               color: fontColor ?? Colors.white,
             ),
       ),
       leading: leadingIcon != null || leadingWidget != null
           ? InkWell(
-              onTap: () {
-                if (onTapLeading == null) {
-                  Navigator.pop(context);
-                } else {
-                  onTapLeading!();
-                }
-              },
+              highlightColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              splashColor: Colors.transparent,
+              onTap: () => onTapLeading == null
+                  ? Navigator.pop(context)
+                  : onTapLeading?.call(),
               child: leadingWidget ??
                   Icon(
                     leadingIcon,
-                    size: iconSize ?? dimen.iconSize_24,
+                    size: iconSize ?? 24,
                     color: iconTint ?? Colors.white,
                   ),
             )
@@ -82,12 +80,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       elevation: elevation,
       actions: [
         trailingIcon != null || trailingWidget != null
-            ? InkWell(
-                onTap: onTapTrailing as void Function()?,
-                child: trailingWidget ??
+            ? IconButton(
+                onPressed: onTapTrailing,
+                padding: const EdgeInsets.all(16),
+                icon: trailingWidget ??
                     Icon(
                       trailingIcon,
-                      size: iconSize ?? dimen.iconSize_24,
+                      size: iconSize ?? 22,
                       color: iconTint ?? Colors.white,
                     ),
               )

@@ -3,9 +3,8 @@ import 'package:dhikri/blocs/home_bloc.dart';
 import 'package:dhikri/configs/settings.dart';
 import 'package:dhikri/model/adhkar_model.dart';
 import 'package:dhikri/model/weekday_model.dart';
-import 'package:dhikri/route_generator.dart';
+import 'package:dhikri/routes/routes.dart';
 import 'package:dhikri/values/colors.dart';
-import 'package:dhikri/values/dimens.dart';
 import 'package:dhikri/values/strings.dart';
 import 'package:dhikri/values/styles.dart';
 import 'package:dhikri/widgets/appbar_widget.dart';
@@ -27,23 +26,23 @@ class HomePage extends StatelessWidget {
       onInit: (bloc) => bloc.init(),
       builder: (context, bloc, child) => Container(
         decoration: BoxDecoration(
-          gradient: color.homeScaffoldColor,
+          gradient: color.scaffold,
         ),
         child: Scaffold(
           key: _key,
           appBar: AppBarWidget(
             title: Str.of(context).appName,
-            fontSize: dimen.fontSize_36,
+            fontSize: 36,
             fontWeight: FontWeight.w900,
-            fontColor: color.homeDisabledColor,
+            fontColor: color.disable,
             leadingIcon: Icons.menu,
-            iconTint: color.homeDisabledColor,
+            iconTint: color.disable,
             onTapLeading: () => _key.currentState!.openDrawer(),
           ),
           drawer: DrawerWidget(
             bloc: bloc,
-            backgroundColor: color.homeScaffoldColor,
-            contentColor: color.homeDisabledColor,
+            backgroundColor: color.scaffold,
+            contentColor: color.disable,
           ),
           drawerScrimColor: Colors.transparent,
           body: SafeArea(
@@ -53,23 +52,18 @@ class HomePage extends StatelessWidget {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(
-                    dimen.margin_12,
-                    dimen.margin_12,
-                    dimen.margin_12,
-                    0.0,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: dimen.padding_12,
-                    vertical: dimen.padding_6,
+                  margin: const EdgeInsets.fromLTRB(12, 12, 12, 0.0),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 6,
                   ),
                   decoration: BoxDecoration(
-                    color: color.homeDisabledColor,
-                    borderRadius: BorderRadius.only(
-                      topLeft: const Radius.circular(0.0),
-                      topRight: Radius.circular(dimen.radius_12),
-                      bottomLeft: Radius.circular(dimen.radius_24),
-                      bottomRight: Radius.circular(dimen.radius_12),
+                    color: color.disable,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(0.0),
+                      topRight: Radius.circular(12),
+                      bottomLeft: Radius.circular(24),
+                      bottomRight: Radius.circular(12),
                     ),
                   ),
                   child: Column(
@@ -82,10 +76,10 @@ class HomePage extends StatelessWidget {
                         style: style.titleStyle.copyWith(
                           color: Colors.black,
                           fontWeight: FontWeight.w600,
-                          fontSize: dimen.fontSize_20,
+                          fontSize: 20,
                         ),
                       ),
-                      SizedBox(height: dimen.margin_8),
+                      const SizedBox(height: 8),
                       Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -101,19 +95,19 @@ class HomePage extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: dimen.margin_2),
+                const SizedBox(height: 2),
                 Expanded(
                   flex: 1,
                   child: Center(
                     child: ListView.separated(
-                      padding: EdgeInsets.only(
-                        top: dimen.padding_12,
-                        bottom: dimen.padding_12,
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        bottom: 12,
                       ),
                       physics: const BouncingScrollPhysics(),
                       itemCount: bloc.adhkars.length,
                       separatorBuilder: (_, i) {
-                        return SizedBox(height: dimen.margin_12);
+                        return const SizedBox(height: 12);
                       },
                       scrollDirection: Axis.vertical,
                       shrinkWrap: true,
@@ -121,7 +115,7 @@ class HomePage extends StatelessWidget {
                         return AdhkarWidget(
                           adhkar: bloc.adhkars[i],
                           onSelect: (azkar) => Navigator.of(context).pushNamed(
-                            kItemsRoute,
+                            Routes.itemsPage,
                             arguments: [bloc, azkar],
                           ),
                         );
@@ -153,13 +147,13 @@ class WeekdayWidget extends StatelessWidget {
     return InkWell(
       highlightColor: Colors.transparent,
       focusColor: Colors.transparent,
+      splashColor: Colors.transparent,
       onTap: () {
         if (onCheck != null) onCheck!(weekDay);
       },
       child: Container(
         width: MediaQuery.of(context).size.width / 9,
-        margin: EdgeInsets.symmetric(
-            vertical: dimen.margin_4, horizontal: dimen.margin_2),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 2),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -167,7 +161,7 @@ class WeekdayWidget extends StatelessWidget {
           children: [
             AutoSizeText(
               settings.isBangla ? weekDay.dayBn ?? '' : weekDay.dayEn ?? '',
-              minFontSize: dimen.fontSize_14,
+              minFontSize: 14,
               maxLines: 1,
               overflow: TextOverflow.fade,
               style: style.labelStyle.copyWith(
@@ -178,24 +172,23 @@ class WeekdayWidget extends StatelessWidget {
             Container(
               decoration: BoxDecoration(
                 color: weekDay.status == null
-                    ? color.homeSecondaryColor.withOpacity(.25)
+                    ? color.secondary.withOpacity(.25)
                     : weekDay.status!
-                        ? color.homeEnabledColor
+                        ? color.enable
                         : Colors.red,
-                borderRadius:
-                    BorderRadius.all(Radius.circular(dimen.radius_16)),
+                borderRadius: const BorderRadius.all(Radius.circular(16)),
               ),
-              margin: EdgeInsets.only(top: dimen.margin_6),
-              padding: EdgeInsets.all(dimen.padding_2),
+              margin: const EdgeInsets.only(top: 6),
+              padding: const EdgeInsets.all(2),
               child: weekDay.status == null
-                  ? SizedBox(
-                      height: dimen.iconSize_14,
-                      width: dimen.iconSize_14,
+                  ? const SizedBox(
+                      height: 14,
+                      width: 14,
                     )
                   : Icon(
                       weekDay.status! ? Icons.check : Icons.clear,
-                      color: color.homeDisabledColor,
-                      size: dimen.iconSize_14,
+                      color: color.disable,
+                      size: 14,
                     ),
             )
           ],
@@ -217,12 +210,13 @@ class AdhkarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        if (onSelect != null) onSelect!(adhkar);
-      },
+    return InkWell(
+      highlightColor: Colors.transparent,
+      focusColor: Colors.transparent,
+      splashColor: Colors.transparent,
+      onTap: () => onSelect?.call(adhkar),
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: dimen.margin_24),
+        margin: const EdgeInsets.symmetric(horizontal: 24),
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -231,7 +225,7 @@ class AdhkarWidget extends StatelessWidget {
               fit: BoxFit.fitWidth,
             ),
             Padding(
-              padding: EdgeInsets.all(dimen.padding_16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -245,22 +239,22 @@ class AdhkarWidget extends StatelessWidget {
                           : adhkar?.titleEn ?? '',
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      minFontSize: dimen.fontSize_18,
+                      minFontSize: 18,
                       style: style.headlineTitleStyle
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
                   ),
-                  SizedBox(height: dimen.margin_20),
+                  const SizedBox(height: 20),
                   LinearPercentIndicator(
                     width: MediaQuery.of(context).size.width / 2,
                     animation: true,
                     animationDuration: 500,
-                    lineHeight: dimen.viewHeight_8,
+                    lineHeight: 8,
                     percent: (adhkar?.progress?.round() ?? 0) / 100,
                     padding: EdgeInsets.zero,
                     barRadius: const Radius.circular(8),
-                    backgroundColor: color.homeDisabledColor,
-                    progressColor: color.homeEnabledColor,
+                    backgroundColor: color.disable,
+                    progressColor: color.enable,
                   ),
                 ],
               ),

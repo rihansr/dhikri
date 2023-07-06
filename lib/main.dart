@@ -1,3 +1,4 @@
+import 'package:dhikri/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -6,7 +7,7 @@ import 'package:dhikri/configs/provider_config.dart';
 import 'package:dhikri/configs/settings.dart';
 import 'package:dhikri/helper/navigation_service.dart';
 import 'package:dhikri/helper/preference_manager.dart';
-import 'package:dhikri/route_generator.dart';
+import 'package:dhikri/routes/route_generator.dart';
 import 'package:dhikri/values/colors.dart';
 import 'package:dhikri/values/drawables.dart';
 
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      systemNavigationBarColor: color.homePrimaryColor,
+      systemNavigationBarColor: color.primary,
       systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
@@ -57,7 +58,7 @@ class MyApp extends StatelessWidget {
                 locale: value,
                 localizationsDelegates: AppLocalizations.localizationsDelegates,
                 supportedLocales: AppLocalizations.supportedLocales,
-                initialRoute: kHomeRoute,
+                initialRoute: Routes.homePage,
                 onGenerateRoute: RouterGenerator.generateRoute,
               );
             },

@@ -23,8 +23,8 @@ class CustomDialog extends StatelessWidget {
   final double buttonFontSize;
   final Axis buttonDirection;
   final Color? buttonBackground;
-  final Function? onNegativeButtonClicked;
-  final Function? onPositiveButtonClicked;
+  final Function()? onNegativeButtonClicked;
+  final Function()? onPositiveButtonClicked;
 
   const CustomDialog({
     Key? key,
@@ -71,10 +71,11 @@ class CustomDialog extends StatelessWidget {
               alignment: Alignment.topRight,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 8.0),
-                child: GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pop();
-                  },
+                child: InkWell(
+                  highlightColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  splashColor: Colors.transparent,
+                  onTap: () => Navigator.of(context).pop(),
                   child: const Icon(
                     Icons.clear,
                     color: Color(0xFF888888),
@@ -92,7 +93,7 @@ class CustomDialog extends StatelessWidget {
                   style: titleFontStyle ??
                       TextStyle(
                         fontSize: titleFontSize,
-                        color: titleFontColor ?? color.homePrimaryColor,
+                        color: titleFontColor ?? color.primary,
                         fontWeight: FontWeight.normal,
                         letterSpacing: .48,
                       ),
@@ -108,7 +109,7 @@ class CustomDialog extends StatelessWidget {
                   style: subtitleFontStyle ??
                       TextStyle(
                         fontSize: subtitleFontSize,
-                        color: subtitleFontColor ?? color.homeSecondaryColor,
+                        color: subtitleFontColor ?? color.secondary,
                         fontWeight: FontWeight.normal,
                         letterSpacing: .48,
                       ),
@@ -160,7 +161,7 @@ class CustomDialog extends StatelessWidget {
     );
   }
 
-  Widget actionButton(BuildContext context, String label, Function? function) {
+  Widget actionButton(BuildContext context, String label, Function()? action) {
     return Container(
       decoration: BoxDecoration(
         color: buttonBackground ?? Colors.transparent,
@@ -173,14 +174,14 @@ class CustomDialog extends StatelessWidget {
           style: buttonFontStyle ??
               TextStyle(
                 fontSize: buttonFontSize,
-                color: buttonFontColor ?? color.homePrimaryColor,
+                color: buttonFontColor ?? color.primary,
                 fontWeight: FontWeight.normal,
                 letterSpacing: .48,
               ),
         ),
         onPressed: () async {
           Navigator.of(context).pop();
-          if (function != null) function();
+          action?.call();
         },
       ),
     );
@@ -215,7 +216,7 @@ showFullScreenDialog({
             },
             child: Container(
               decoration: BoxDecoration(
-                gradient: background ?? color.homeScaffoldColor,
+                gradient: background ?? color.scaffold,
               ),
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
