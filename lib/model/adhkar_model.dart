@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:equatable/equatable.dart';
 
 enum ItemsView { list, grid }
 
@@ -10,7 +9,7 @@ Adhkar adhkarFromJson(String str) => Adhkar.fromJson(json.decode(str));
 String adhkarToJson(Adhkar data) => json.encode(data.toJson());
 
 // ignore: must_be_immutable
-class Adhkar extends Equatable {
+class Adhkar {
   Adhkar({
     this.id,
     this.titleBn,
@@ -108,11 +107,16 @@ class Adhkar extends Equatable {
       };
 
   @override
-  List<Object?> get props => [id];
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Adhkar && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 // ignore: must_be_immutable
-class AdhkarItem extends Equatable {
+class AdhkarItem {
   AdhkarItem({
     this.id,
     this.adhkarIds,
@@ -179,13 +183,18 @@ class AdhkarItem extends Equatable {
         "icon": icon,
         "title_bn": titleBn,
         "title_en": titleEn,
-        "detail_bn": detailBn == null ? null : detailBn!.toJson(),
-        "detail_en": detailEn == null ? null : detailEn!.toJson(),
+        "detail_bn": detailBn?.toJson(),
+        "detail_en": detailEn?.toJson(),
         "read": read,
       };
 
   @override
-  List<Object?> get props => [id];
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is AdhkarItem && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
 }
 
 class Detail {

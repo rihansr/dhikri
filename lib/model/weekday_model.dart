@@ -1,12 +1,11 @@
 import 'dart:convert';
-import 'package:equatable/equatable.dart';
 
 Weekday weekdayFromJson(String str) => Weekday.fromJson(json.decode(str));
 
 String weekdayToJson(Weekday data) => json.encode(data.toJson());
 
 // ignore: must_be_immutable
-class Weekday extends Equatable {
+class Weekday {
   Weekday({
     this.id,
     this.dayBn,
@@ -47,5 +46,12 @@ class Weekday extends Equatable {
       };
 
   @override
-  List<Object?> get props => [id];
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is Weekday && id == other.id;
+  }
+
+  @override
+  int get hashCode => id.hashCode;
 }

@@ -210,10 +210,8 @@ showFullScreenDialog({
       }
       return StatefulBuilder(
         builder: (context, setState) {
-          return WillPopScope(
-            onWillPop: () {
-              return Future.value(dismissible);
-            },
+          return PopScope(
+            canPop: dismissible,
             child: Container(
               decoration: BoxDecoration(
                 gradient: background ?? color.scaffold,
@@ -247,10 +245,8 @@ Future<void> showDialogBox(
         scale: a1.value,
         child: Opacity(
             opacity: a1.value,
-            child: WillPopScope(
-              onWillPop: () {
-                return Future(() => false);
-              },
+            child: PopScope(
+              canPop: false,
               child: Center(
                 child: child ?? Container(),
               ),
